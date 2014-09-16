@@ -1,0 +1,24 @@
+<p>Your email</p>
+<p>{{email}}</p>
+<form id="attribute-details" name="whatever1">
+<table>
+    <tr>
+        <th>email</th>
+        {{#each emailAttributes}}
+            <th>{{this}}</th>
+        {{/each}}
+    </tr>
+    </tr>
+    {{#each emailAddresses}}
+        <tr>
+            <td>
+                {{this}}
+            </td>
+            {{#each ../emailAttributes}}
+                <td><input type="text" name="{{this}}" placeholder="{{this}}" /></td>
+            {{/each}}
+        </tr>
+    {{/each}}
+</table>
+<button id="submit-attributes">Continue</button><span id="empty-attributes" style="display : none;">Looks like you've missed out some fields, is that okay?</span>
+</form>

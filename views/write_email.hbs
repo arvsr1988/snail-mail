@@ -1,0 +1,23 @@
+<input id="page-name" type="hidden" value="home"/>
+<style>
+
+</style>
+<div id="container">
+    <div id="email-details" class="flow">
+        <form id="email-details-form">
+            <input id="from-name" placeholder="From (your name)"/>
+            <p>Personalise your email by using ${attribute}. The subject can be personalised too!</p>
+            <p>E.g. if you want to say "Hello John" or "Hello Amy" then write Hello ${name}. You will be able to enter the fields in the next screen</p>
+            <input id="subject" placeholder="Subject of the email" />
+            <textarea id="email-content" name="emailContent" placeholder="The Email" ></textarea>
+            <textarea id="csv-recipients" placeholder="Emails of the recipients (comma separated)" ></textarea>
+            <button id="submit-button">Continue</button>
+        </form>
+    </div>
+
+
+    <div id="enter-attributes" style="display : none;" class="flow">
+    </div>
+
+
+</div>

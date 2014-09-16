@@ -1,0 +1,8 @@
+* {
+  font-family : Helvetica, Arial, sans-serif;;
+}
+
+#email-details {
+  input, textarea {display : block; width : 300px; font-size : 14pt; margin : 5px 0px;}
+  .unhappyMessage {color : red;}
+}
