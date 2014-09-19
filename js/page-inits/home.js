@@ -4,8 +4,6 @@ var emailPersonalisation = require('./email_personalisation.js');
 module.exports = {
     init : function() {
         console.log("inside index page 1");
-        $("#client-side-render").html(homeTemplate({data : "whatever you want!"}));
-
 
         var isValidEmail = function (emailAddress) {
             var pattern = new RegExp(/^(("[\w-+\s]+")|([\w-+]+(?:\.[\w-+]+)*)|("[\w-+\s]+")([\w-+]+(?:\.[\w-+]+)*))(@((?:[\w-+]+\.)*\w[\w-+]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
@@ -21,15 +19,14 @@ module.exports = {
         };
 
 
-        function submitForm(){
+        var submitForm = function(){
             event.preventDefault();
             console.log("valid inputs");
             emailPersonalisation.init();
             return false;
-        }
+        };
 
         $("#email-details-form").isHappy({
-            debug : true,
             fields : {
                 '#from-name': { required : true, message : 'Please enter your name'},
                 '#email-content': { required : true, message : 'Please enter some text'},
