@@ -10,9 +10,19 @@ var gulp = require('gulp'),
     serverport = 5000;
 var handlebars = require('gulp-handlebars');
 var defineModule = require('gulp-define-module');
+var favicon = require('static-favicon');
+var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
 
 var server = express();
 var expressHbs = require('express-handlebars');
+server.use(favicon());
+server.use(logger('dev'));
+server.use(bodyParser.json());
+server.use(bodyParser.urlencoded({ extended: true }));
+server.use(cookieParser());
+
 server.engine('hbs', expressHbs({extname:'hbs', defaultLayout : 'main.hbs'}));
 server.set('view engine', 'hbs');
 
@@ -24,6 +34,7 @@ server.use(express.static('./build'));
 
 //routes
 var writeEmail = require('./routes/write.email.js');
+var sendEmail =  require('./routes/send.email.js');
 //TODO : move this to a new file
 server.get("/", function(req, res){
     var data = {name : "arvind", layout : false};
@@ -31,7 +42,7 @@ server.get("/", function(req, res){
 });
 
 server.get('/write-email', writeEmail.show);
-
+server.post('/send-email', sendEmail.send);
 
 gulp.task('templates', function(){
     gulp.src(['templates/*.hbs'])
