@@ -1,6 +1,6 @@
 var emailFunctions = require('../functions/email.functions');
 var login = require('./login_details');
-var emailAttributesTemplate = require('../../build/templates/email_attributes.js');
+var emailAttributesTemplate = require('../../dist/templates/email_attributes.js');
 module.exports = {
     init: function () {
         var attributes = [];

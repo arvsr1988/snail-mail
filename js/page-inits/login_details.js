@@ -1,4 +1,4 @@
-var accountDetailsTemplate = require('../../build/templates/email_account_details.js');
+var accountDetailsTemplate = require('../../dist/templates/email_account_details.js');
 module.exports = {
     init: function () {
         $("#login-details").html(accountDetailsTemplate()).show();
