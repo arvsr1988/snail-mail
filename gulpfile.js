@@ -35,6 +35,8 @@ var appDependencies = require('./package.json').dependencies;
 gulp.task('copy', function(){
    gulp.src('js/plugins/**/*.js')
        .pipe(gulp.dest(publicDir + '/plugins/'));
+    gulp.src('js/**/*.js')
+        .pipe(gulp.dest(buildDir + '/js/'));
     gulp.src('app.js')
         .pipe(gulp.dest(buildDir));
     gulp.src('package.json')
