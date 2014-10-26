@@ -22,7 +22,8 @@ module.exports = {
         async.each(emailArray,
             function(email, callback) {
                 var mailOptions = {
-                    from: commonAttributes['from-name'],
+                    from: commonAttributes['from-name'] + '<' + fromEmail + '>',
+                    sender : fromEmail,
                     to: email.to,
                     subject: commonAttributes['subject'],
                     text: email.text,

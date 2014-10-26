@@ -1,0 +1,15 @@
+{{#if successful}}
+    All emails sent successfully
+{{else}}
+    Oops, your mails were not sent! The ones that failed are :
+{{#each emails}}
+    <ul>
+    {{#unless successful}}
+    <li class="email-response error">
+        {{to}} : {{error}}
+    </li>
+    {{/unless}}
+    </ul>
+{{/each}}
+{{/if}}
+</div>

@@ -23,6 +23,20 @@ exports.send = function(req,res) {
     var emailArray = getEmails();
     emailer.sendEmails(emailArray, req.body, function(emailResponses){
        console.log(emailResponses);
-        res.send(200);
+        var successful = true;
+        var emailStatusArray = [];
+        emailResponses.forEach(function(emailResponse, index){
+            successful = successful && emailResponse.successful;
+            emailStatusArray[index] = {};
+            emailStatusArray[index].successful = emailResponse.successful;
+            emailStatusArray[index].error = '';
+            if(!emailResponse.successful){
+                emailStatusArray[index].error = emailResponse.error.response;
+            }
+            emailStatusArray[index].to = emailResponse.email.to;
+        });
+        //TODO : send the trimmed response here
+        var response = {successful : successful, emails : emailStatusArray};
+        res.json(response);
     });
 };
