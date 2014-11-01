@@ -22,12 +22,7 @@ app.set('port', process.env.PORT || '5000');
 var writeEmail = require('./routes/write.email.js');
 var sendEmail =  require('./routes/send.email.js');
 
-app.get("/", function(req, res){
-    var data = {name : "arvind", layout : false};
-    res.render('home', data);
-});
-
-app.get('/write-email', writeEmail.show);
+app.get("/", writeEmail.show);
 app.post('/send-email', sendEmail.send);
 
 module.exports = app;
