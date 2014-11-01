@@ -12,12 +12,16 @@ module.exports = {
         var sendEmails = function () {
             event.preventDefault();
             console.log("ready to send the emails! finally :) ");
+            $("#send-email-response").hide();
+            $("#send-spinner").show();
             $.ajax({
                 type : 'POST',
                 url: '/send-email',
                 data: $("#attribute-details").serialize() + '&' +  $("#email-details-form").serialize() + '&' + $("#email-account-details").serialize(),
                 success: function (data) {
                     $("#send-email-response").html(responseTemplate(data));
+                    $("#send-email-response").show();
+                    $("#send-spinner").hide();
                 }
             });
         };

@@ -1,8 +1,125 @@
 * {
-  font-family : 'Helvetica', Arial, sans-serif;;
+  font-family: 'Helvetica', Arial, sans-serif;;
+}
+
+.hide {
+  display : none;
 }
 
 #container {
-  input, textarea {display : block; width : 300px; font-size : 14pt; margin : 5px 0px;}
-  .unhappyMessage {color : red;}
+  margin: 0 auto;
+  max-width: 960px;
+  form {
+    max-width: 600px;
+  }
+  input, textarea {
+    display: block;
+    width: 100%;
+    font-size: 14pt;
+    margin: 5px 0px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 3px;
+  }
+  button {
+    background: #2A8EC0;
+    color: #fff;
+    border-radius: 5px;
+    width: 141px;
+    padding: 7px 0px 8px;
+    font-size: 14pt;
+    -webkit-appearance: none;
+    appearance: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  textarea {
+    height: 100px;
+  }
+  .unhappyMessage {
+    color: red;
+    display: block;
+    padding: 2px 0px;
+  }
+  p.unimportant {
+    color: #ccc;
+  }
+
+  #enter-attributes {
+    #empty-attributes {
+      padding-left: 10px;
+    }
+  }
+
+  #flow-container {
+    #breadcrumb {
+      list-style: none;
+      overflow: hidden;
+      font: 18px Helvetica, Arial, Sans-Serif;
+      padding-left: 0px;
+      li {
+        $color: #94C6E0;
+        float: left;
+        color: white;
+        text-decoration: none;
+        padding: 10px 0 10px 55px;
+        background: $color;
+        position: relative;
+        display: block;
+        $border-after : 30px solid;
+        cursor : pointer;
+        &:after {
+          content: " ";
+          display: block;
+          width: 0;
+          height: 0;
+          border-top: 50px solid transparent; /* Go big on the size, and let overflow hide */
+          border-bottom: 50px solid transparent;
+          border-left: $border-after $color;
+          position: absolute;
+          top: 50%;
+          margin-top: -50px;
+          left: 100%;
+          z-index: 2;
+        }
+        &:before {
+          content: " ";
+          display: block;
+          width: 0;
+          height: 0;
+          border-top: 50px solid transparent; /* Go big on the size, and let overflow hide */
+          border-bottom: 50px solid transparent;
+          border-left: 30px solid white;
+          position: absolute;
+          top: 50%;
+          margin-top: -50px;
+          margin-left: 1px;
+          left: 100%;
+          z-index: 1;
+        }
+        &:hover {
+          background: black !important;
+        }
+        &:hover:after {
+          border-left-color: black !important;
+        }
+
+        &.clickable {
+          $color: #2A8EC0;
+          background : $color;
+          &:after {
+            border-left : $border-after $color;
+          }
+        }
+        &.selected {
+          $color: #195573;
+          background: $color;
+          &:after {
+            border-left: $border-after $color;
+          }
+        }
+      }
+    }
+  }
 }

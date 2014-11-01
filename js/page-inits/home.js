@@ -1,6 +1,6 @@
 var homeTemplate = require('../../dist/templates/home.js');
 var emailPersonalisation = require('./email_personalisation.js');
-
+var flow = require('./flow');
 module.exports = {
     init : function() {
         console.log("inside index page 1");
@@ -23,6 +23,7 @@ module.exports = {
             event.preventDefault();
             console.log("valid inputs");
             emailPersonalisation.init();
+            flow.moveTo("enter-attributes");
             return false;
         };
 
@@ -39,5 +40,6 @@ module.exports = {
             happy : submitForm
         });
 
+        flow.bind();
     }
 };

@@ -1,6 +1,7 @@
 var emailFunctions = require('../functions/email.functions');
 var login = require('./login_details');
 var emailAttributesTemplate = require('../../dist/templates/email_attributes.js');
+var flow = require('./flow');
 module.exports = {
     init: function () {
         var attributes = [];
@@ -14,6 +15,8 @@ module.exports = {
     },
 
     renderView: function (attributes) {
+        $(".flow").hide();
+        $("#enter-attributes").show();
         var emailAddresses = $('#csv-recipients').val().split(',');
         var emailContent = $("#email-content").val();
         $('#enter-attributes').html(emailAttributesTemplate({emailContent: emailContent, emailAddresses: emailAddresses, emailAttributes: attributes})).show();
@@ -37,6 +40,7 @@ module.exports = {
             var anyAttributeEmpty = emptyAttributes($("#attribute-details").serializeArray());
             $("#empty-attributes").toggle(anyAttributeEmpty);
             login.init();
+            flow.moveTo("login-details");
         });
     }
 };

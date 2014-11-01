@@ -13,7 +13,8 @@ exports.send = function(req,res) {
             email.text = emailContent.substring(0);
             emailAttrs.forEach(function(attr){
                 var attributeValueArray = req.param(attr);
-                email.text = email.text.replace('${' + attr + '}', attributeValueArray[index]);
+                var attributeValue = typeof(attributeValueArray) === 'string' ? attributeValueArray : attributeValueArray[index];
+                email.text = email.text.replace('${' + attr + '}', attributeValue);
             });
             emailArray.push(email);
         });

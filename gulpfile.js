@@ -33,6 +33,8 @@ var rimraf = require('gulp-rimraf');
 
 var appDependencies = require('./package.json').dependencies;
 gulp.task('copy', function(){
+   gulp.src('images/**/*')
+       .pipe(gulp.dest(publicDir + '/images/'));
    gulp.src('js/plugins/**/*.js')
        .pipe(gulp.dest(publicDir + '/plugins/'));
     gulp.src('js/**/*.js')

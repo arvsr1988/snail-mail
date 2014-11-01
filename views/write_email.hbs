@@ -1,25 +1,30 @@
 <input id="page-name" type="hidden" value="home"/>
-<style>
-
-</style>
 <div id="container">
-    <p>None of the information entered here will be stored locally</p>
+    <h1>Send Personalised Emails from your own email account!</h1>
+    <h3>None of your personal data will be stored</h3>
+    <div id="flow-container">
+        <ol id="breadcrumb">
+        <li id="email-details-crumb" class="clickable selected" data-enabled="true">Basic Details</li>
+        <li id="enter-attributes-crumb" data-enabled="false">Personalise Your emails</li>
+        <li id="login-details-crumb" data-enabled="false">Enter Login Details</li>
+        </ol>
+    </div>
     <div id="email-details" class="flow">
         <form id="email-details-form">
-            <input id="from-name" name="from-name" placeholder="From (your name)"/>
-            <p>Personalise your email by using ${attribute}. The subject can be personalised too!</p>
-            <p>E.g. if you want to say "Hello John" or "Hello Amy" then write Hello ${name}. You will be able to enter the fields in the next screen</p>
-            <input id="subject" name="subject" placeholder="Subject of the email" />
-            <textarea id="email-content" name="email-content" placeholder="The Email" ></textarea>
-            <textarea id="csv-recipients" name="recipients" placeholder="Emails of the recipients (comma separated)" ></textarea>
+            <input id="from-name" name="from-name" placeholder="From (your name)" value="Arvd"/>
+            <p>Personalise your email by using putting ${anything}.</p>
+            <p>to write "Hello John" or "Hello Amy" in different emails, use "Hello ${name}" in the text. You can customise each name in the next step</p>
+            <input id="subject" name="subject" placeholder="Subject" value="whatever" />
+            <textarea id="email-content" name="email-content" placeholder="Email text">hello ${name}</textarea>
+            <textarea id="csv-recipients" name="recipients" placeholder="Emails of the recipients (comma separated)">arvsr2002@gmail.com, arvsr2002@yahoo.com</textarea>
             <button id="submit-button">Continue</button>
         </form>
     </div>
-
 
     <div id="enter-attributes" style="display : none;" class="flow"></div>
 
     <div id="login-details" style="display : none;" class="flow"></div>
 
-    <div id="send-email-response"></div>
+    <div id="send-email-response" class="flow"></div>
+
 </div>
