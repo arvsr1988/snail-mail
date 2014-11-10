@@ -1,9 +1,20 @@
 var accountDetailsTemplate = require('../../dist/templates/email_account_details.js');
 var responseTemplate = require('../../dist/templates/email_send_response.js');
+var urlHelpers = require('../functions/url.helpers');
 module.exports = {
     init: function () {
         $("#login-details").html(accountDetailsTemplate()).show();
+        this.bindGmailLogin();
         this.bindFormSubmit();
+    },
+
+    bindGmailLogin : function(){
+        $("#gmail-login-link").click(function(){
+            var url = $(this).attr("href");
+            url = url + "&state=" + encodeURIComponent($("#attribute-details").serialize() + '&' +  $("#email-details-form").serialize());
+            url = url + "&redirect_uri=" + encodeURIComponent(urlHelpers.getHost() + "/googleOuathResponse");
+            $(this).attr("href", url);
+        });
     },
 
     bindFormSubmit: function () {
@@ -33,6 +44,5 @@ module.exports = {
             },
             happy: sendEmails
         });
-
     }
 };

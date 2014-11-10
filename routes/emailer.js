@@ -16,6 +16,9 @@ module.exports = {
                 user: fromEmail,
                 pass: password
             }
+
+            //for oauth
+            //xoauth2 : 'ya29.uQAAurF2PFONlUvgi24pUNUVpGqcGKrF12wRGUJi1d52otzHRsB2ZEcK7aDoxr4N5Fim7eFpqSF6uw'
         });
 
         var emailResponses = [];

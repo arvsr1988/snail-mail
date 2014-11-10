@@ -8,12 +8,13 @@ exports.send = function(req,res) {
         var emailAttrs = emailFunctions.getAttributes(emailContent);
         var recipients = req.param('recipients').split(',');
         var emailArray = [];
+        var singleRecipient = recipients.length === 1;
         recipients.forEach(function(recipient, index){
             var email = {to : recipient};
             email.text = emailContent.substring(0);
             emailAttrs.forEach(function(attr){
                 var attributeValueArray = req.param(attr);
-                var attributeValue = typeof(attributeValueArray) === 'string' ? attributeValueArray : attributeValueArray[index];
+                var attributeValue = singleRecipient ? attributeValueArray : attributeValueArray[index];
                 email.text = email.text.replace('${' + attr + '}', attributeValue);
             });
             emailArray.push(email);

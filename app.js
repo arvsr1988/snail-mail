@@ -21,9 +21,11 @@ app.set('port', process.env.PORT || '5000');
 //routes
 var writeEmail = require('./routes/write.email.js');
 var sendEmail =  require('./routes/send.email.js');
+var googleOauthResponse = require('./routes/google.oauth.response.js');
 
 app.get("/", writeEmail.show);
 app.post('/send-email', sendEmail.send);
+app.get('/googleOuathResponse', googleOauthResponse.handle);
 
 module.exports = app;
 var server = http.createServer(app);
