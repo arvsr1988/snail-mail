@@ -1,16 +1,10 @@
 var request = require('request');
+var emailHelpers = require('./email.helpers');
+var emailer = require('./emailer');
+var url = require('url');
 
 module.exports = {
-
     handle: function (req, res) {
-        console.log("google app authorisatin - query params");
-        console.log(req.query);
-        console.log("google app authorisatin - post params");
-        console.log(req.body);
-        console.log("google app authorisatin - original url");
-        console.log(req.originalUrl);
-
-        var emailFormParams = req.query.state;
         var form = {
             code: req.query.code,
             client_id: '421703536444-megt0e62oo4kjamdavcq451f61snfi70.apps.googleusercontent.com',
@@ -18,6 +12,7 @@ module.exports = {
             redirect_uri: 'http://localhost:5000/googleOuathResponse',
             grant_type: 'authorization_code'
         };
+        var accessToken = '';
         request.post({
             url: 'https://accounts.google.com/o/oauth2/token',
             form: form,
@@ -25,22 +20,26 @@ module.exports = {
         }, function (err, response, body) {
             console.log("google oauth body");
             console.dir(body);
-
+            accessToken = body.access_token;
             var headers = {
-                'Authorization': 'Bearer ' + body.access_token
+                'Authorization': 'Bearer ' + accessToken
             };
             request.get({
                 url: 'https://www.googleapis.com/plus/v1/people/me',
                 headers: headers,
                 json : true
             }, function (err, response, body) {
+                var parsedUrl =  url.parse(req.originalUrl, true);
+                var emailFormParams = url.parse("/anything?"+ parsedUrl.query.state, true).query;
+                console.dir(emailFormParams);
                 var fromEmail = body.emails[0].value;
-                console.dir(fromEmail);
-                res.send(200);
+                var emailContent = emailHelpers.getEmailArray(emailFormParams);
+                emailFormParams['email-account'] = fromEmail;
+                emailFormParams['accessToken'] = accessToken;
+                emailer.sendEmails(emailContent, emailFormParams, 'Gmail', function(response){
+                    res.render('send-email-response', response);
+                });
             });
         });
-
-
     }
-
 };

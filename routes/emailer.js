@@ -1,7 +1,7 @@
 var nodemailer = require("nodemailer");
 var async = require('async');
 module.exports = {
-    sendEmails: function (emailArray, commonAttributes, finalCallback) {
+    sendEmails: function (emailArray, commonAttributes, service, finalCallback) {
         var fromEmail = commonAttributes['email-account'];
         var password = commonAttributes['password'];
         var getService = function () {
@@ -10,18 +10,23 @@ module.exports = {
             return regex.exec(address)[1];
         };
 
-        var smtpTransport = nodemailer.createTransport({
-            service: getService(),
+        var transportObject = {
+            service: service ? service : getService(),
             auth: {
                 user: fromEmail,
                 pass: password
             }
+        };
 
-            //for oauth
-            //xoauth2 : 'ya29.uQAAurF2PFONlUvgi24pUNUVpGqcGKrF12wRGUJi1d52otzHRsB2ZEcK7aDoxr4N5Fim7eFpqSF6uw'
-        });
+        if(commonAttributes.accessToken){
+            delete transportObject.auth.pass;
+            transportObject.auth.xoauth2 = commonAttributes.accessToken;
+        }
+        var smtpTransport = nodemailer.createTransport(transportObject);
 
-        var emailResponses = [];
+        var successful = true;
+        var emailStatusArray = [];
+        //var emailResponses = [];
         async.each(emailArray,
             function(email, callback) {
                 var mailOptions = {
@@ -33,16 +38,21 @@ module.exports = {
                     html: email.text
                 };
 
-
                 smtpTransport.sendMail(mailOptions, function (error, response) {
-                    emailResponses.push({email : email, error : error, response : response, successful : !error});
+                    successful = successful && !error;
+                    var emailStatus = {sucessful : !error, to : email.to, error : ''};
+                    if(error){
+                        emailStatus.error = error.response;
+                    }
+                    emailStatusArray.push(emailStatus);
+                    //emailResponses.push({email : email, error : error, response : response, successful : !error});
                     callback(error);
                 });
             }
             ,function(err){
                 console.log(err);
                 smtpTransport.close();
-                finalCallback(emailResponses);
+                finalCallback({successful : successful, emails : emailStatusArray});
             });
     }
 };
