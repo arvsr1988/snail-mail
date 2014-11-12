@@ -9,7 +9,7 @@ module.exports = {
             code: req.query.code,
             client_id: '421703536444-megt0e62oo4kjamdavcq451f61snfi70.apps.googleusercontent.com',
             client_secret: 'lSkDHrnRyTYIjxNqAU_s7UD9',
-            redirect_uri: 'http://localhost:5000/googleOuathResponse',
+            redirect_uri: req.protocol + '://' + req.get('host')  + '/googleOuathResponse',
             grant_type: 'authorization_code'
         };
         var accessToken = '';
@@ -24,6 +24,10 @@ module.exports = {
             var headers = {
                 'Authorization': 'Bearer ' + accessToken
             };
+            if(!body.access_token){
+                res.render('error', {message : "Oops, something went wrong. Please try again"});
+                return;
+            }
             request.get({
                 url: 'https://www.googleapis.com/plus/v1/people/me',
                 headers: headers,

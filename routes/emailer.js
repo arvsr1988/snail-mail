@@ -26,7 +26,6 @@ module.exports = {
 
         var successful = true;
         var emailStatusArray = [];
-        //var emailResponses = [];
         async.each(emailArray,
             function(email, callback) {
                 var mailOptions = {
@@ -40,7 +39,7 @@ module.exports = {
 
                 smtpTransport.sendMail(mailOptions, function (error, response) {
                     successful = successful && !error;
-                    var emailStatus = {sucessful : !error, to : email.to, error : ''};
+                    var emailStatus = {successful : !error, to : email.to, error : ''};
                     if(error){
                         emailStatus.error = error.response;
                     }
