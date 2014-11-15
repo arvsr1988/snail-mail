@@ -18,13 +18,13 @@ module.exports = {
             form: form,
             json: true
         }, function (err, response, body) {
-            console.log("google oauth body");
-            console.dir(body);
             accessToken = body.access_token;
             var headers = {
                 'Authorization': 'Bearer ' + accessToken
             };
             if(!body.access_token){
+                console.log("ERROR - Unable to retrieve access token");
+                console.log(body);
                 res.render('error', {message : "Oops, something went wrong. Please try again"});
                 return;
             }
@@ -35,7 +35,6 @@ module.exports = {
             }, function (err, response, body) {
                 var parsedUrl =  url.parse(req.originalUrl, true);
                 var emailFormParams = url.parse("/anything?"+ parsedUrl.query.state, true).query;
-                console.dir(emailFormParams);
                 var fromEmail = body.emails[0].value;
                 var emailContent = emailHelpers.getEmailArray(emailFormParams);
                 emailFormParams['email-account'] = fromEmail;
