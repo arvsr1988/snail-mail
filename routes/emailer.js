@@ -32,7 +32,7 @@ module.exports = {
                     from: commonAttributes['from-name'] + '<' + fromEmail + '>',
                     sender : fromEmail,
                     to: email.to,
-                    subject: commonAttributes['subject'],
+                    subject: email.subject,
                     text: email.text,
                     html: email.text
                 };
