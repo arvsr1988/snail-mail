@@ -5,8 +5,7 @@ module.exports = {
     getEmailArray : function(formParams){
         var emailContent = formParams['email-content'];
         var subject = formParams['subject'];
-        var emailAttrs = emailFunctions.getAttributes(emailContent);
-        emailAttrs.push(emailFunctions.getAttributes(subject));
+        var emailAttrs = emailFunctions.getAttributes(emailContent, subject);
         var recipients = formParams['recipients'].split(',');
         var emailArray = [];
         var singleRecipient = recipients.length === 1;

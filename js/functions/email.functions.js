@@ -1,12 +1,18 @@
+var arrayHelpers = require('./array.helpers');
 module.exports = {
-    getAttributes : function(emailString){
-        var attrs = [];
-        var patternString = /(?:\$\{)?([a-zA-Z0-9]+)(?:\})/g;
-        var letter = emailString;
-        var patternMatch;
-        while((patternMatch = patternString.exec(letter)) !== null){
-            attrs.push(patternMatch[1]);
-        }
-        return attrs;
+    getAttributes : function(emailString, subject){
+        var attributes = [];
+        var setAttributes = function(fromString) {
+            var patternString = /(?:\$\{)?([a-zA-Z0-9]+)(?:\})/g;
+            var letter = fromString;
+            var patternMatch;
+            while((patternMatch = patternString.exec(letter)) !== null){
+                attributes.push(patternMatch[1]);
+            }
+        };
+
+        setAttributes(emailString);
+        setAttributes(subject);
+        return arrayHelpers.getUniqueItems(attributes);
     }
 };

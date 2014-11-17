@@ -5,8 +5,7 @@ var flow = require('./flow');
 module.exports = {
     init: function () {
         var attributes = [];
-        attributes = attributes.concat(emailFunctions.getAttributes($("#subject").val()));
-        attributes = attributes.concat(emailFunctions.getAttributes($('#email-content').val()));
+        attributes = attributes.concat(emailFunctions.getAttributes($('#email-content').val(), $("#subject").val()));
         if (attributes.length === 0) {
             login.init();
             return false;
@@ -24,8 +23,6 @@ module.exports = {
     },
 
     bindFormSubmit: function () {
-
-        //TODO : refactor this to use every or something like that.
         var emptyAttributes = function (formAttributes) {
             var filteredElements = formAttributes.filter(function (element) {
                 return element.value === '';
