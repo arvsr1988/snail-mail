@@ -2,8 +2,11 @@ var emailFunctions = require('../js/functions/email.functions');
 
 module.exports = {
 
-    getEmailArray : function(formParams){
+    getEmailArray : function(hostname, formParams){
         var emailContent = formParams['email-content'];
+        if(formParams['include-signature']){
+            emailContent = emailContent + '<br /><br /> This email was personalised using <a href="' + hostname + '"> Snail Mail</a>';
+        }
         var subject = formParams['subject'];
         var emailAttrs = emailFunctions.getAttributes(emailContent, subject);
         var recipients = formParams['recipients'].split(',');

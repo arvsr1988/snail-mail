@@ -5,11 +5,12 @@ var url = require('url');
 
 module.exports = {
     handle: function (req, res) {
+        var hostname =  req.protocol + '://' + req.get("host");
         var form = {
             code: req.query.code,
             client_id: '421703536444-megt0e62oo4kjamdavcq451f61snfi70.apps.googleusercontent.com',
             client_secret: 'lSkDHrnRyTYIjxNqAU_s7UD9',
-            redirect_uri: req.protocol + '://' + req.get('host')  + '/googleOuathResponse',
+            redirect_uri: hostname + '/googleOuathResponse',
             grant_type: 'authorization_code'
         };
         var accessToken = '';
@@ -36,7 +37,7 @@ module.exports = {
                 var parsedUrl =  url.parse(req.originalUrl, true);
                 var emailFormParams = url.parse("/anything?"+ parsedUrl.query.state, true).query;
                 var fromEmail = body.emails[0].value;
-                var emailContent = emailHelpers.getEmailArray(emailFormParams);
+                var emailContent = emailHelpers.getEmailArray(hostname, emailFormParams);
                 emailFormParams['email-account'] = fromEmail;
                 emailFormParams['accessToken'] = accessToken;
                 emailer.sendEmails(emailContent, emailFormParams, 'Gmail', function(response){

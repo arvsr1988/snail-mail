@@ -21,6 +21,10 @@
     border-radius: 3px;
     padding: 3px;
   }
+  input[type='checkbox'] {
+    width: initial;
+    display: initial;
+  }
   button {
     background: #2A8EC0;
     color: #fff;
@@ -32,6 +36,8 @@
     appearance: none;
     border: none;
     cursor: pointer;
+    display : block;
+    margin : 5px 0px;
   }
 
   textarea {
