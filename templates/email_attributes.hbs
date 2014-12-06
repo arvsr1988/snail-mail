@@ -12,7 +12,7 @@
     {{#each emailAddresses}}
         <tr>
             <td>
-                {{this}}
+                <input type="text" name="recipientEmails" value="{{this}}" />
             </td>
             {{#each ../emailAttributes}}
                 <td><input type="text" name="{{this}}" placeholder="{{this}}" /></td>
