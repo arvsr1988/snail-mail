@@ -1,7 +1,7 @@
 <p>Your email</p>
 <p>{{emailContent}}</p>
 <form id="attribute-details" name="whatever1">
-<table>
+<table id="email-attribute-table">
     <tr>
         <th>email</th>
         {{#each emailAttributes}}
@@ -17,6 +17,8 @@
             {{#each ../emailAttributes}}
                 <td><input type="text" name="{{this}}" placeholder="{{this}}" /></td>
             {{/each}}
+            <td class="add email-row-button"> + </td>
+            <td class="remove email-row-button"> - </td>
         </tr>
     {{/each}}
 </table>

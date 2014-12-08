@@ -11,6 +11,8 @@ module.exports = {
             return false;
         }
         this.renderView(attributes);
+        this.bindRowManipulation(attributes);
+        this.bindFormSubmit();
     },
 
     renderView: function (attributes) {
@@ -19,7 +21,6 @@ module.exports = {
         var emailAddresses = $('#csv-recipients').val().split(',');
         var emailContent = $("#email-content").val();
         $('#enter-attributes').html(emailAttributesTemplate({emailContent: emailContent, emailAddresses: emailAddresses, emailAttributes: attributes})).show();
-        this.bindFormSubmit();
     },
 
     bindFormSubmit: function () {
@@ -38,6 +39,17 @@ module.exports = {
             $("#empty-attributes").toggle(anyAttributeEmpty);
             login.init();
             flow.moveTo("login-details");
+        });
+    },
+    bindRowManipulation : function(){
+        $("#email-attribute-table").on("click",".email-row-button", function(){
+            var addRow = $(this).hasClass("add");
+            if(addRow){
+                alert("add new row. TODO : complete");
+                return false;
+            }
+
+            $(this).parent('tr').remove();
         });
     }
 };
