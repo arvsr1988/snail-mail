@@ -10,10 +10,10 @@ var buildDir = 'dist';
 var publicDir = buildDir + '/public';
 
 gulp.task('templates', function(){
-    gulp.src(['templates/*.hbs'])
+    gulp.src(['views/partials/*.hbs'])
         .pipe(handlebars({handlebars: require('handlebars')}))
         .pipe(defineModule('node'))
-        .pipe(gulp.dest(buildDir + '/templates/'));
+        .pipe(gulp.dest(buildDir + '/views/partials/'));
 });
 
 gulp.task('sass', function(){
@@ -76,8 +76,8 @@ gulp.task('watch', function() {
         gulp.run('html');
     });
 
-    gulp.watch('templates/**/*.hbs', function(){
-       gulp.run('templates', 'browserify');
+    gulp.watch('views/**/*.hbs', function(){
+       gulp.run('views', 'browserify');
     });
 });
 

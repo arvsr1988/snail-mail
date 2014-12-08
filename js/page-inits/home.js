@@ -1,4 +1,3 @@
-var homeTemplate = require('../../dist/templates/home.js');
 var emailPersonalisation = require('./email_personalisation.js');
 var flow = require('./flow');
 module.exports = {
