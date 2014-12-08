@@ -1,9 +1,7 @@
 var gulp = require('gulp'),
     sass = require('gulp-sass'),
     browserify = require('gulp-browserify'),
-    concat = require('gulp-concat'),
-    refresh = require('gulp-livereload'),
-    lrserver = require('tiny-lr')();
+    concat = require('gulp-concat');
 var handlebars = require('gulp-handlebars');
 var defineModule = require('gulp-define-module');
 var buildDir = 'dist';
@@ -70,10 +68,6 @@ gulp.task('watch', function() {
 
     gulp.watch('js/**/*.js', function() {
         gulp.run('browserify');
-    });
-
-    gulp.watch('views/*.html', function () {
-        gulp.run('html');
     });
 
     gulp.watch('views/**/*.hbs', function(){
