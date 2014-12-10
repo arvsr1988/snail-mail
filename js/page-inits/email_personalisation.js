@@ -1,6 +1,8 @@
 var emailFunctions = require('../functions/email.functions');
 var login = require('./login_details');
-var emailAttributesTemplate = require('../../dist/views/partials/email_attributes.js');
+var Handlebars = require("hbsfy/runtime");
+var emailAttributesTemplate = require('../../views/partials/email_attributes.hbs');
+Handlebars.registerPartial('email_attribute_row', require('../../views/partials/email_attribute_row.hbs'));
 var flow = require('./flow');
 module.exports = {
     init: function () {

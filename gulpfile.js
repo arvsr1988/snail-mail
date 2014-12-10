@@ -2,18 +2,8 @@ var gulp = require('gulp'),
     sass = require('gulp-sass'),
     browserify = require('gulp-browserify'),
     concat = require('gulp-concat');
-var handlebars = require('gulp-handlebars');
-var defineModule = require('gulp-define-module');
 var buildDir = 'dist';
 var publicDir = buildDir + '/public';
-
-gulp.task('templates', function(){
-    gulp.src(['views/partials/*.hbs'])
-        .pipe(handlebars({handlebars: require('handlebars')}))
-        .pipe(defineModule('node'))
-        .pipe(gulp.dest(buildDir + '/views/partials/'));
-});
-
 gulp.task('sass', function(){
     gulp.src('sass/*.scss')
         .pipe(sass())
@@ -22,7 +12,10 @@ gulp.task('sass', function(){
 
 gulp.task('browserify', function(){
     gulp.src('js/*.js')
-        .pipe(browserify())
+        .pipe(browserify({
+            "transform": ["hbsfy"]
+            }
+        ))
         .pipe(concat('bundle.js'))
         .pipe(gulp.dest(publicDir))
 });
@@ -58,7 +51,7 @@ gulp.task('clean', function() {
 
 //Convenience task for running a one-off build
 gulp.task('build', ['clean'],  function() {
-    gulp.run('copy', 'templates','browserify', 'sass');
+    gulp.run('copy', 'browserify', 'sass');
 });
 
 gulp.task('watch', function() {
@@ -71,7 +64,7 @@ gulp.task('watch', function() {
     });
 
     gulp.watch('views/**/*.hbs', function(){
-       gulp.run('views', 'browserify');
+       //this should run the browserify
     });
 });
 

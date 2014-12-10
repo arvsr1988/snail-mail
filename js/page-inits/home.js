@@ -20,7 +20,6 @@ module.exports = {
 
         var submitForm = function(){
             event.preventDefault();
-            console.log("valid inputs");
             emailPersonalisation.init();
             flow.moveTo("enter-attributes");
             return false;

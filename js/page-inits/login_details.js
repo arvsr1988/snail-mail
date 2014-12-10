@@ -1,5 +1,5 @@
-var accountDetailsTemplate = require('../../dist/views/partials/email_account_details.js');
-var responseTemplate = require('../../dist/views/partials/email_send_response.js');
+var accountDetailsTemplate = require('../../views/partials/email_account_details.hbs');
+var responseTemplate = require('../../views/partials/email_send_response.hbs');
 var urlHelpers = require('../functions/url.helpers');
 module.exports = {
     init: function () {
