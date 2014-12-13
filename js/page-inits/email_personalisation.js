@@ -2,6 +2,7 @@ var emailFunctions = require('../functions/email.functions');
 var login = require('./login_details');
 var Handlebars = require("hbsfy/runtime");
 var emailAttributesTemplate = require('../../views/partials/email_attributes.hbs');
+var emailAttributeRowTemplate = require('../../views/partials/email_attribute_row.hbs');
 Handlebars.registerPartial('email_attribute_row', require('../../views/partials/email_attribute_row.hbs'));
 var flow = require('./flow');
 module.exports = {
@@ -22,7 +23,12 @@ module.exports = {
         $("#enter-attributes").show();
         var emailAddresses = $('#csv-recipients').val().split(',');
         var emailContent = $("#email-content").val();
-        $('#enter-attributes').html(emailAttributesTemplate({emailContent: emailContent, emailAddresses: emailAddresses, emailAttributes: attributes})).show();
+        var emails = [];
+        emailAddresses.forEach(function(address){
+            var email = {address : address, attributes : attributes};
+            emails.push(email);
+        });
+        $('#enter-attributes').html(emailAttributesTemplate({emailContent: emailContent, emails : emails, emailAttributes : attributes})).show();
     },
 
     bindFormSubmit: function () {
@@ -43,15 +49,15 @@ module.exports = {
             flow.moveTo("login-details");
         });
     },
-    bindRowManipulation : function(){
+    bindRowManipulation : function(attributes){
         $("#email-attribute-table").on("click",".email-row-button", function(){
             var addRow = $(this).hasClass("add");
             if(addRow){
-                alert("add new row. TODO : complete");
+                $("#email-attribute-table").append(emailAttributeRowTemplate({address : '', attributes : attributes}));
                 return false;
             }
 
-            $(this).parent('tr').remove();
+            $(this).closest('tr').remove();
         });
     }
 };

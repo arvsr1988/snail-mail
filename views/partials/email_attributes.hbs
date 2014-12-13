@@ -9,17 +9,8 @@
         {{/each}}
     </tr>
     </tr>
-    {{#each emailAddresses}}
-        <tr>
-            <td>
-                <input type="text" name="recipientEmails" value="{{this}}" />
-            </td>
-            {{#each ../emailAttributes}}
-                <td><input type="text" name="{{this}}" placeholder="{{this}}" /></td>
-            {{/each}}
-            <td class="add email-row-button"> + </td>
-            <td class="remove email-row-button"> - </td>
-        </tr>
+    {{#each emails}}
+        {{> email_attribute_row this}}
     {{/each}}
 </table>
 <button id="submit-attributes">Continue</button><span id="empty-attributes" style="display : none;">Looks like you've missed out some fields, is that okay?</span>

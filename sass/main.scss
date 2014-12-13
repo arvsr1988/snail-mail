@@ -3,7 +3,7 @@
 }
 
 .hide {
-  display : none;
+  display: none;
 }
 
 #container {
@@ -36,8 +36,8 @@
     appearance: none;
     border: none;
     cursor: pointer;
-    display : block;
-    margin : 5px 0px;
+    display: block;
+    margin: 5px 0px;
   }
 
   textarea {
@@ -56,6 +56,17 @@
     #empty-attributes {
       padding-left: 10px;
     }
+  .email-row-button {
+    width: 50px;
+    font-weight: bold;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: initial;
+    &.remove {
+      background-image: linear-gradient(#E63D4E, #C11A39);
+    }
+    &.add {background-image: linear-gradient(#aaa,grey);}
+  }
   }
 
   #flow-container {
@@ -73,8 +84,8 @@
         background: $color;
         position: relative;
         display: block;
-        $border-after : 30px solid;
-        cursor : pointer;
+        $border-after: 30px solid;
+        cursor: pointer;
         &:after {
           content: " ";
           display: block;
@@ -113,9 +124,9 @@
 
         &.clickable {
           $color: #2A8EC0;
-          background : $color;
+          background: $color;
           &:after {
-            border-left : $border-after $color;
+            border-left: $border-after $color;
           }
         }
         &.selected {

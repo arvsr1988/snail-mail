@@ -9,9 +9,10 @@ module.exports = {
         }
         var subject = formParams['subject'];
         var emailAttrs = emailFunctions.getAttributes(emailContent, subject);
-        var recipients = formParams['recipientEmails'];
+        var recipientEmails = formParams['recipientEmails'];
+        var singleRecipient = typeof(recipientEmails) === "string";
+        var recipients = singleRecipient ? [recipientEmails] : recipientEmails;
         var emailArray = [];
-        var singleRecipient = recipients.length === 1;
         recipients.forEach(function(recipient, index){
             var email = {to : recipient};
             email.text = emailContent.substring(0);
