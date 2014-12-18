@@ -29,14 +29,12 @@
     background: #2A8EC0;
     color: #fff;
     border-radius: 5px;
-    width: 141px;
-    padding: 7px 0px 8px;
+    padding: 10px;
     font-size: 14pt;
     -webkit-appearance: none;
     appearance: none;
     border: none;
     cursor: pointer;
-    display: block;
     margin: 5px 0px;
   }
 
@@ -57,16 +55,15 @@
       padding-left: 10px;
     }
   .email-row-button {
-    width: 50px;
-    font-weight: bold;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: initial;
-    &.remove {
+    &.remove-email-row {
       background-image: linear-gradient(#E63D4E, #C11A39);
+      padding: 5px 20px;
     }
-    &.add {background-image: linear-gradient(#aaa,grey);}
   }
+    #add-email-row {background-image: linear-gradient(#aaa,grey);}
   }
 
   #flow-container {

@@ -50,14 +50,13 @@ module.exports = {
         });
     },
     bindRowManipulation : function(attributes){
-        $("#email-attribute-table").on("click",".email-row-button", function(){
-            var addRow = $(this).hasClass("add");
-            if(addRow){
-                $("#email-attribute-table").append(emailAttributeRowTemplate({address : '', attributes : attributes}));
-                return false;
-            }
-
+        $("#email-attribute-table").on("click",".remove-email-row", function(){
             $(this).closest('tr').remove();
+        });
+        $("#add-email-row").unbind("click");
+        $("#add-email-row").click(function(){
+            $("#email-attribute-table").append(emailAttributeRowTemplate({address : '', attributes : attributes}));
+            return false;
         });
     }
 };
