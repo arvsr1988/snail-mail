@@ -32,6 +32,15 @@ module.exports = {
     },
 
     bindFormSubmit: function () {
+        var validEmails = function(){
+            var emailElements = $("#attribute-details input[name=recipientEmails]");
+            //to do arvind : break off if at least one of them isnt valid
+            var emailsValid = emailElements.filter(function(email){
+                return emailFunctions.isValidEmail($(email).val());
+            });
+            return emailsValid.length === emailElements.length;
+        };
+
         var emptyAttributes = function (formAttributes) {
             var filteredElements = formAttributes.filter(function (element) {
                 return element.value === '';
@@ -43,6 +52,11 @@ module.exports = {
         $("#submit-attributes").click(function (event) {
             event.preventDefault();
             console.log($("#attribute-details").serializeArray());
+            var areEmailsValid = validEmails();
+            if(!areEmailsValid){
+                alert("enter valid emails!");
+                return false;
+            }
             var anyAttributeEmpty = emptyAttributes($("#attribute-details").serializeArray());
             $("#empty-attributes").toggle(anyAttributeEmpty);
             login.init();
