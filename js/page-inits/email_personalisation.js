@@ -25,7 +25,7 @@ module.exports = {
         var emailContent = $("#email-content").val();
         var emails = [];
         emailAddresses.forEach(function(address){
-            var email = {address : address, attributes : attributes};
+            var email = {address : address.trim(), attributes : attributes};
             emails.push(email);
         });
         $('#enter-attributes').html(emailAttributesTemplate({emailContent: emailContent, emails : emails, emailAttributes : attributes})).show();
