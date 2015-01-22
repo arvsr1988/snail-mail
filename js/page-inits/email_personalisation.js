@@ -34,11 +34,14 @@ module.exports = {
     bindFormSubmit: function () {
         var validEmails = function(){
             var emailElements = $("#attribute-details input[name=recipientEmails]");
-            //to do arvind : break off if at least one of them isnt valid
-            var emailsValid = emailElements.filter(function(email){
-                return emailFunctions.isValidEmail($(email).val());
+            var emailsValid = true;
+            emailElements.each(function(index, element){
+                 if(!emailFunctions.isValidEmail($(element).val())) {
+                     emailsValid = false;
+                     return false;
+                 };
             });
-            return emailsValid.length === emailElements.length;
+            return emailsValid;
         };
 
         var emptyAttributes = function (formAttributes) {
