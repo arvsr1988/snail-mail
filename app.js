@@ -30,7 +30,8 @@ app.use(session({
     secret: 'asdfsa',
     resave: false,
     saveUninitialized: true,
-    proxy : true
+    proxy : true,
+    unset : 'destroy'
 }));
 
 app.get("/", writeEmail.show);

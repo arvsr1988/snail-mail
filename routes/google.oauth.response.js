@@ -1,6 +1,7 @@
 var request = require('request');
 var emailHelpers = require('./email.helpers');
 var emailer = require('./emailer');
+var sessionHandler = require('./session.handler.js');
 
 module.exports = {
     handle: function (req, res) {
@@ -34,11 +35,17 @@ module.exports = {
                 json : true
             }, function (err, response, body) {
                 var emailFormParams = req.session.emailData;
+                if(!emailFormParams){
+                    res.send(200);
+                    return;
+                }
+
                 var fromEmail = body.emails[0].value;
                 var emailContent = emailHelpers.getEmailArray(hostname, emailFormParams);
                 emailFormParams['email-account'] = fromEmail;
                 emailFormParams['accessToken'] = accessToken;
                 emailer.sendEmails(emailContent, emailFormParams, 'Gmail', function(response){
+                    sessionHandler.destroy(req);
                     res.render('send-email-response', response);
                 });
             });
