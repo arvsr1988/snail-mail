@@ -3,6 +3,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var express = require('express');
+var session = require('express-session');
 var app = express();
 var expressHbs = require('express-handlebars');
 var path = require('path');
@@ -23,9 +24,18 @@ app.set('trust proxy', 'loopback');
 var writeEmail = require('./routes/write.email.js');
 var sendEmail =  require('./routes/send.email.js');
 var googleOauthResponse = require('./routes/google.oauth.response.js');
+var emailData = require('./routes/email.data.js');
+
+app.use(session({
+    secret: 'asdfsa',
+    resave: false,
+    saveUninitialized: true,
+    proxy : true
+}));
 
 app.get("/", writeEmail.show);
 app.post('/send-email', sendEmail.send);
+app.post('/saveEmailData', emailData.save);
 app.get('/googleOuathResponse', googleOauthResponse.handle);
 
 module.exports = app;

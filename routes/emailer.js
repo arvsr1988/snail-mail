@@ -49,7 +49,6 @@ module.exports = {
                 });
             }
             ,function(err){
-                console.log(err);
                 smtpTransport.close();
                 finalCallback({successful : successful, emails : emailStatusArray});
             });

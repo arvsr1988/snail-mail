@@ -1,6 +1,7 @@
 var accountDetailsTemplate = require('../../views/partials/email_account_details.hbs');
 var responseTemplate = require('../../views/partials/email_send_response.hbs');
 var urlHelpers = require('../functions/url.helpers');
+var emailData = require('../functions/email_data');
 module.exports = {
     init: function () {
         $("#login-details").html(accountDetailsTemplate()).show();
@@ -11,9 +12,14 @@ module.exports = {
     bindGmailLogin : function(){
         $("#gmail-login-link").click(function(){
             var url = $(this).attr("href");
-            url = url + "&state=" + encodeURIComponent($("#attribute-details").serialize() + '&' +  $("#email-details-form").serialize());
-            url = url + "&redirect_uri=" + encodeURIComponent(urlHelpers.getHost() + "/googleOuathResponse");
-            $(this).attr("href", url);
+            var serializedFormDetails = $("#attribute-details").serialize() + '&' +  $("#email-details-form").serialize();
+            emailData.save(serializedFormDetails, function(successful){
+                if(!successful){
+                    alert("Oops, something went wrong. Please try again");
+                }
+                window.location.href = url + "&redirect_uri=" + encodeURIComponent(urlHelpers.getHost() + "/googleOuathResponse");
+            });
+            return false;
         });
     },
 

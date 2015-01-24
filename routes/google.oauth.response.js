@@ -1,7 +1,6 @@
 var request = require('request');
 var emailHelpers = require('./email.helpers');
 var emailer = require('./emailer');
-var url = require('url');
 
 module.exports = {
     handle: function (req, res) {
@@ -34,8 +33,7 @@ module.exports = {
                 headers: headers,
                 json : true
             }, function (err, response, body) {
-                var parsedUrl =  url.parse(req.originalUrl, true);
-                var emailFormParams = url.parse("/anything?"+ parsedUrl.query.state, true).query;
+                var emailFormParams = req.session.emailData;
                 var fromEmail = body.emails[0].value;
                 var emailContent = emailHelpers.getEmailArray(hostname, emailFormParams);
                 emailFormParams['email-account'] = fromEmail;
