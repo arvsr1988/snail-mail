@@ -1,9 +1,6 @@
 <tr>
-    <td>
-        <input type="text" name="recipientEmails" value="{{address}}" />
-    </td>
-    {{#each attributes}}
-        <td><input type="text" name="{{this}}" placeholder="{{this}}" /></td>
+    {{#each this}}
+        <td><input type="text" name="{{name}}" placeholder="{{name}}" value="{{value}}" /></td>
     {{/each}}
     <td><button class="remove-email-row email-row-button">-</button></td>
 </tr>

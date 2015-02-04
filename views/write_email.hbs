@@ -15,7 +15,17 @@
             <p>to write "Hello John" or "Hello Amy" in different emails, use "Hello ${name}" in the text. You can customise each name in the next step</p>
             <input id="subject" name="subject" placeholder="Subject" />
             <textarea id="email-content" name="email-content" placeholder="Email text"></textarea>
-            <textarea id="csv-recipients" placeholder="Emails of the recipients (comma separated)"></textarea>
+            <div id="email-details-container">
+                <div id="csv-emails-container">
+                    <textarea id="csv-recipients" placeholder="Emails of the recipients (comma separated)"></textarea>
+                </div>
+                <div id="or-container">
+                    OR
+                </div>
+                <div id="file-upload-container">
+                    <input type="file" id="email-attributes-file" enctype="multipart/form-data" />
+                </div>
+            </div>
             <input id="includeSignature" name="include-signature" type="checkbox" />
             <label for="includeSignature">Add a link to this website in my email signature.</label><br />
             <button id="submit-button">Continue</button>

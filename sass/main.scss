@@ -50,6 +50,24 @@
     color: #ccc;
   }
 
+  #email-details {
+    #email-details-container {
+      width: 100%;
+      overflow: auto;
+      display: table;
+
+      #csv-emails-container {
+        width : 40%; display : table-cell;
+      }
+      #or-container {
+        width : 10%; display : table-cell; vertical-align : middle; text-align : center;
+      }
+      #file-upload-container {
+        width : 40%; display : table-cell; vertical-align : middle;
+      }
+    }
+  }
+
   #enter-attributes {
     #empty-attributes {
       padding-left: 10px;

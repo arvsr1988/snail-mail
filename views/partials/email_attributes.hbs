@@ -3,13 +3,12 @@
 <form id="attribute-details" name="whatever1">
 <table id="email-attribute-table">
     <tr>
-        <th>email</th>
         {{#each emailAttributes}}
             <th>{{this}}</th>
         {{/each}}
     </tr>
     </tr>
-    {{#each emails}}
+    {{#each attributeRows}}
         {{> email_attribute_row this}}
     {{/each}}
 </table>

@@ -6,34 +6,35 @@ var emailAttributeRowTemplate = require('../../views/partials/email_attribute_ro
 Handlebars.registerPartial('email_attribute_row', require('../../views/partials/email_attribute_row.hbs'));
 var flow = require('./flow');
 module.exports = {
-    init: function () {
-        var attributes = [];
+    init: function (attributeData) {
+        var attributes = ['email'];
         attributes = attributes.concat(emailFunctions.getAttributes($('#email-content').val(), $("#subject").val()));
         if (attributes.length === 0) {
             login.init();
             return false;
         }
-        this.renderView(attributes);
+        this.renderView(attributes, attributeData);
         this.bindRowManipulation(attributes);
         this.bindFormSubmit();
     },
 
-    renderView: function (attributes) {
+    renderView: function (attributes, attributeData) {
         $(".flow").hide();
         $("#enter-attributes").show();
-        var emailAddresses = $('#csv-recipients').val().split(',');
         var emailContent = $("#email-content").val();
-        var emails = [];
-        emailAddresses.forEach(function(address){
-            var email = {address : address.trim(), attributes : attributes};
-            emails.push(email);
+        var attributeViewData = [];
+        attributeData.forEach(function(row, rowIndex){
+            attributeViewData[rowIndex] = [];
+            attributes.forEach(function(attributeName){
+                attributeViewData[rowIndex].push({name : attributeName, value : row[attributeName]});
+            });
         });
-        $('#enter-attributes').html(emailAttributesTemplate({emailContent: emailContent, emails : emails, emailAttributes : attributes})).show();
+        $('#enter-attributes').html(emailAttributesTemplate({emailContent: emailContent, emailAttributes : attributes, attributeRows : attributeViewData})).show();
     },
 
     bindFormSubmit: function () {
         var validEmails = function(){
-            var emailElements = $("#attribute-details input[name=recipientEmails]");
+            var emailElements = $("#attribute-details input[name=email]");
             var emailsValid = true;
             emailElements.each(function(index, element){
                  if(!emailFunctions.isValidEmail($(element).val())) {
