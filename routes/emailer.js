@@ -23,7 +23,6 @@ module.exports = {
             transportObject.auth.xoauth2 = commonAttributes.accessToken;
         }
         var smtpTransport = nodemailer.createTransport(transportObject);
-
         var successful = true;
         var emailStatusArray = [];
         async.each(emailArray,
@@ -44,11 +43,13 @@ module.exports = {
                         emailStatus.error = error.response;
                     }
                     emailStatusArray.push(emailStatus);
-                    //emailResponses.push({email : email, error : error, response : response, successful : !error});
-                    callback(error);
+                    if(error){
+                        console.log("ERROR sending an email -- " + error);
+                    }
+                    callback(null);
                 });
             }
-            ,function(err){
+            ,function(){
                 smtpTransport.close();
                 finalCallback({successful : successful, emails : emailStatusArray});
             });
