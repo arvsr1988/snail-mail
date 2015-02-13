@@ -5,7 +5,7 @@ var bodyParser = require('body-parser');
 var express = require('express');
 var session = require('express-session');
 var app = express();
-var expressHbs = require('express-handlebars');
+var handlebarFactory = require('./app/handlebar.factory.js');
 var path = require('path');
 var http = require('http');
 app.use(favicon());
@@ -13,7 +13,8 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.engine('hbs', expressHbs({extname:'hbs', defaultLayout : 'main.hbs'}));
+var hbs = handlebarFactory.init();
+app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, 'public')));
 

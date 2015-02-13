@@ -24,24 +24,16 @@ var rimraf = require('gulp-rimraf');
 
 var appDependencies = require('./package.json').dependencies;
 gulp.task('copy', function(){
-   gulp.src('images/**/*')
-       .pipe(gulp.dest(publicDir + '/images/'));
    gulp.src('js/plugins/**/*.js')
        .pipe(gulp.dest(publicDir + '/plugins/'));
     gulp.src('js/**/*.js')
         .pipe(gulp.dest(buildDir + '/js/'));
-    gulp.src('app.js')
-        .pipe(gulp.dest(buildDir));
-    gulp.src('package.json')
+    gulp.src(['app/**/*','images/**/*','app.js','views/**/*', 'routes/**/*'], {base : '.'})
         .pipe(gulp.dest(buildDir));
     for(var dependency in appDependencies){
         gulp.src('node_modules/'+dependency + '/**/*')
             .pipe(gulp.dest(buildDir+'/node_modules/' + dependency));
     }
-    gulp.src('views/**/*')
-        .pipe(gulp.dest(buildDir+'/views'));
-    gulp.src('routes/**/*')
-        .pipe(gulp.dest(buildDir+'/routes'));
 });
 
 gulp.task('clean', function() {
