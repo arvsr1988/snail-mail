@@ -73,7 +73,11 @@ module.exports = {
         });
         $("#add-email-row").unbind("click");
         $("#add-email-row").click(function(){
-            $("#email-attribute-table").append(emailAttributeRowTemplate({address : '', attributes : attributes}));
+            var attributeViewData = [];
+            attributes.forEach(function(row, index){
+                attributeViewData[index] = {name : row, value : ''};
+            });
+            $("#email-attribute-table").append(emailAttributeRowTemplate(attributeViewData));
             return false;
         });
     }
