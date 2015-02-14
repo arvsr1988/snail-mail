@@ -4,7 +4,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var express = require('express');
 var session = require('express-session');
+var methodOverride = require('method-override');
 var app = express();
+global._ROOT = __dirname + '/';
 var handlebarFactory = require('./app/handlebar.factory.js');
 var path = require('path');
 var http = require('http');
@@ -39,6 +41,11 @@ app.get("/", writeEmail.show);
 app.post('/send-email', sendEmail.send);
 app.post('/saveEmailData', emailData.save);
 app.get('/googleOuathResponse', googleOauthResponse.handle);
+
+app.use(function(err, req, res, next){
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+});
 
 module.exports = app;
 var server = http.createServer(app);

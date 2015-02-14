@@ -1,18 +1,7 @@
 <div>
-{{#if successful}}
-    <p>Your emails have been sent</p>
-    <p>You can <a href="https://mail.google.com/mail/u/0/?pli=1#sent" target="_blank">check your sent email</a> to see if your emails were sent as you wanted.</p>
-{{else}}
-    Oops, your mails were not sent! The ones that failed are :
-    {{#each emails}}
-        <ul>
-            {{#unless successful}}
-                <li class="email-response error">
-                    {{to}} : {{error}}
-                </li>
-            {{/unless}}
-        </ul>
-    {{/each}}
-{{/if}}
+    {{#if responseByEmail}}
+        Your emails are being sent. You will get a delivery report in your email. <a href="https://mail.google.com/mail/u/0/?pli=1#inbox">Check your email</a>
+    {{/if}}
+    {{> send_email_status}}
     <p><a href="/">Send another email</a></p>
 </div>
