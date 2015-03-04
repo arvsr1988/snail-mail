@@ -33,6 +33,7 @@ module.exports = {
                     from: commonAttributes['from-name'] + '<' + fromEmail + '>',
                     sender : fromEmail,
                     to: email.to,
+                    replyTo : commonAttributes['replyTo'] ? commonAttributes['replyTo'] : "",
                     subject: email.subject,
                     text: email.text,
                     html: email.text
