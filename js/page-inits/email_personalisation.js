@@ -55,7 +55,6 @@ module.exports = {
         $("#submit-attributes").unbind('click');
         $("#submit-attributes").click(function (event) {
             event.preventDefault();
-            console.log($("#attribute-details").serializeArray());
             var areEmailsValid = validEmails();
             if(!areEmailsValid){
                 alert("enter valid emails!");

@@ -24,11 +24,8 @@ module.exports = {
     },
 
     bindFormSubmit: function () {
-
-        //todo : move this to another file
         var sendEmails = function () {
             event.preventDefault();
-            console.log("ready to send the emails! finally :) ");
             $("#send-email-response").hide();
             $("#send-spinner").show();
             $.ajax({
@@ -42,13 +39,5 @@ module.exports = {
                 }
             });
         };
-
-        $("#email-account-details").isHappy({
-            fields: {
-                '#email': {required: true, email: true, message: 'Please enter a valid email address'},
-                '#password': {required: true, message: 'Enter a password'}
-            },
-            happy: sendEmails
-        });
     }
 };
