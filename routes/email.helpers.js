@@ -1,29 +1,26 @@
 var emailFunctions = require('../js/functions/email.functions');
+var emailPersonalisation = require('../app/email.personalisation');
 
 module.exports = {
-
-    getEmailArray : function(hostname, formParams){
-        var emailContent = formParams['email-content'];
-        if(formParams['include-signature']){
-            emailContent = emailContent + '<br /><br /> This email was personalised using <a href="' + hostname + '"> Snail Mail</a>';
-        }
+    getEmailArray: function (hostname, formParams) {
+        var options = {includeSignature: formParams['include-signature']};
+        var text = formParams['email-content'];
         var subject = formParams['subject'];
-        var emailAttrs = emailFunctions.getAttributes(emailContent, subject);
+
+        var personalisationData = [];
         var recipientEmails = formParams['email'];
         var singleRecipient = typeof(recipientEmails) === "string";
         var recipients = singleRecipient ? [recipientEmails] : recipientEmails;
-        var emailArray = [];
-        recipients.forEach(function(recipient, index){
-            var email = {to : recipient};
-            email.text = emailContent.substring(0);
-            emailAttrs.forEach(function(attr){
-                var attributeValueArray = formParams[attr];
+        var attributeArray = emailFunctions.getAttributes(text, subject);
+        recipients.forEach(function (recipient, index) {
+            var emailData = {'email': recipient};
+            attributeArray.forEach(function (attribute) {
+                var attributeValueArray = formParams[attribute];
                 var attributeValue = singleRecipient ? attributeValueArray : attributeValueArray[index];
-                email.text = email.text.replace('${' + attr + '}', attributeValue);
-                email.subject = subject.replace('${' + attr + '}', attributeValue);
+                emailData[attribute] = attributeValue;
             });
-            emailArray.push(email);
+            personalisationData.push(emailData);
         });
-        return emailArray;
+        return emailPersonalisation.getEmails(hostname, options, subject, text, personalisationData);
     }
 };

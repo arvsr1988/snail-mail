@@ -5,6 +5,7 @@ var emailAttributesTemplate = require('../../views/partials/email_attributes.hbs
 var emailAttributeRowTemplate = require('../../views/partials/email_attribute_row.hbs');
 Handlebars.registerPartial('email_attribute_row', require('../../views/partials/email_attribute_row.hbs'));
 var flow = require('./flow');
+var emailPreview = require('../personalisation/preview');
 module.exports = {
     init: function (attributeData) {
         var attributes = ['email'];
@@ -16,6 +17,7 @@ module.exports = {
         this.renderView(attributes, attributeData);
         this.bindRowManipulation(attributes);
         this.bindFormSubmit();
+        emailPreview.init();
     },
 
     renderView: function (attributes, attributeData) {
