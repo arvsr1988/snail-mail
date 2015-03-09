@@ -1,4 +1,5 @@
 var emailFunctions = require('../js/functions/email.functions.js');
+var string = require('./string.js');
 
 var getEmails = function(hostname, options, subject, text, personalisationData){
     if(options.includeSignature){
@@ -11,8 +12,8 @@ var getEmails = function(hostname, options, subject, text, personalisationData){
         email.text = text.substring(0);
         emailAttrs.forEach(function(attr){
             var attributeValue = emailData[attr];
-            email.text = email.text.replace('${' + attr + '}', attributeValue);
-            email.subject = subject.replace('${' + attr + '}', attributeValue);
+            email.text = string.replaceAll(email.text, '${' + attr + '}', attributeValue);
+            email.subject = string.replaceAll(subject, '${' + attr + '}', attributeValue);
         });
         emailArray.push(email);
     });
