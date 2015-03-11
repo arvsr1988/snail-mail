@@ -6,6 +6,7 @@ var emailAttributeRowTemplate = require('../../views/partials/email_attribute_ro
 Handlebars.registerPartial('email_attribute_row', require('../../views/partials/email_attribute_row.hbs'));
 var flow = require('./flow');
 var emailPreview = require('../personalisation/preview');
+var emailPersonalisation = require('../../app/email.personalisation');
 module.exports = {
     init: function (attributeData) {
         var attributes = ['email'];
@@ -31,7 +32,8 @@ module.exports = {
                 attributeViewData[rowIndex].push({name : attributeName, value : row[attributeName]});
             });
         });
-        $('#enter-attributes').html(emailAttributesTemplate({emailContent: emailContent, emailAttributes : attributes, attributeRows : attributeViewData})).show();
+        var emailContentHtml = emailPersonalisation.getHTMLFromText(emailContent);
+        $('#enter-attributes').html(emailAttributesTemplate({emailContent: emailContentHtml, emailAttributes : attributes, attributeRows : attributeViewData})).show();
     },
 
     bindFormSubmit: function () {

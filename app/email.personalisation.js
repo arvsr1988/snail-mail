@@ -1,6 +1,10 @@
 var emailFunctions = require('../js/functions/email.functions.js');
 var string = require('./string.js');
 
+var getHTMLFromText = function(text){
+  return string.replaceAll(text, '\n', '<br />');
+};
+
 var getEmails = function(hostname, options, subject, text, personalisationData){
     if(options.includeSignature){
         text = text + '<br /><br /> This email was personalised using <a href="' + hostname + '"> Snail Mail</a>';
@@ -9,7 +13,7 @@ var getEmails = function(hostname, options, subject, text, personalisationData){
     var emailArray = [];
     personalisationData.forEach(function(emailData){
         var email = {to : emailData['email']};
-        email.text = text.substring(0);
+        email.text = getHTMLFromText(text.substring(0));
         emailAttrs.forEach(function(attr){
             var attributeValue = emailData[attr];
             email.text = string.replaceAll(email.text, '${' + attr + '}', attributeValue);
@@ -21,3 +25,4 @@ var getEmails = function(hostname, options, subject, text, personalisationData){
 };
 
 exports.getEmails = getEmails;
+exports.getHTMLFromText = getHTMLFromText;
