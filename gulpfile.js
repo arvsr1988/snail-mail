@@ -30,9 +30,8 @@ gulp.task('browserify', function(){
 gulp.task('copy', function(){
    gulp.src('js/plugins/**/*.js')
        .pipe(gulp.dest(publicDir + '/plugins/'));
-    gulp.src('js/**/*.js')
-        .pipe(gulp.dest(buildDir + '/js/'));
-    gulp.src(['app/**/*','images/**/*','app.js','views/**/*', 'routes/**/*'], {base : '.'})
+    gulp.src('images/**/*',  {base : '.'}).pipe(gulp.dest(publicDir));
+    gulp.src(['app/**/*','app.js','views/**/*', 'routes/**/*','js/**/*'], {base : '.'})
         .pipe(gulp.dest(buildDir));
     for(var dependency in appDependencies){
         gulp.src('node_modules/'+dependency + '/**/*')
