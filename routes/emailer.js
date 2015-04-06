@@ -1,29 +1,13 @@
 var nodemailer = require("nodemailer");
 var async = require('async');
 var handlebarFactory = require(_ROOT + 'app//handlebar.factory.js');
+var sentEmailLinks = {
+    'Gmail' : 'https://mail.google.com/mail/u/0/?pli=1#sent'
+};
 module.exports = {
-    sendEmails: function (emailArray, commonAttributes, service, finalCallback) {
+    sendEmails: function (emailArray, commonAttributes, transportObject, serviceName, finalCallback) {
         var fromEmail = commonAttributes['email-account'];
-        var password = commonAttributes['password'];
-        var getService = function () {
-            var regex = /@([a-zA-Z0-9]+)\./;
-            var address = fromEmail;
-            return regex.exec(address)[1];
-        };
-
-        var transportObject = {
-            service: service ? service : getService(),
-            auth: {
-                user: fromEmail,
-                pass: password
-            }
-        };
-
-        if(commonAttributes.accessToken){
-            delete transportObject.auth.pass;
-            transportObject.auth.xoauth2 = commonAttributes.accessToken;
-        }
-        var smtpTransport = nodemailer.createTransport(transportObject);
+        var transport = nodemailer.createTransport(transportObject);
         var successful = true;
         var emailStatusArray = [];
         var shouldEmailResponse = emailArray.length > 10;
@@ -39,7 +23,7 @@ module.exports = {
                     html: email.text
                 };
 
-                smtpTransport.sendMail(mailOptions, function (error, response) {
+                transport.sendMail(mailOptions, function (error, response) {
                     successful = successful && !error;
                     var emailStatus = {successful : !error, to : email.to, error : ''};
                     if(error){
@@ -54,11 +38,11 @@ module.exports = {
             }
             ,function(){
                 if(!shouldEmailResponse){
-                    smtpTransport.close();
-                    finalCallback({successful : successful, emails : emailStatusArray});
+                    transport.close();
+                    finalCallback({successful : successful, emails : emailStatusArray, sentEmailLink : sentEmailLinks[serviceName]});
                 } else {
                     var hbs = handlebarFactory.getInstance();
-                    hbs.render(_ROOT + 'views/partials/send_email_status.hbs', {successful : successful, emails : emailStatusArray}).then(
+                    hbs.render(_ROOT + 'views/partials/send_email_status.hbs', {successful : successful, emails : emailStatusArray, sentEmailLink : sentEmailLinks[serviceName]}).then(
                     function(html){
                         var mailOptions = {
                             from: '<' + fromEmail + '>',
@@ -69,11 +53,11 @@ module.exports = {
                             html: html
                         };
 
-                        smtpTransport.sendMail(mailOptions, function (error, response) {
+                        transport.sendMail(mailOptions, function (error, response) {
                             if(error){
                                 console.log("Error sending email report " + error);
                             }
-                            smtpTransport.close();
+                            transport.close();
                         });
                     });
                 }

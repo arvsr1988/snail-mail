@@ -1,12 +1,15 @@
-var emailFunctions = require('../js/functions/email.functions');
 var emailer = require('./emailer');
-var emailHelper = require('./email.helpers');
-// @arvind This is dysfunctional at the moment.
-exports.send = function(req,res) {
-    console.log(req.body);
+var emailHelpers = require(_ROOT + 'routes/email.helpers');
+var transportHelper = require(_ROOT + 'app/transport.helper.js');
+var requestHelpers = require(_ROOT + 'app/request.helpers.js');
 
-    var emailArray = emailHelper.getEmailArray(req.body);
-    emailer.sendEmails(emailArray, req.body, null, function(emailResponses){
-        res.json(emailResponses);
+exports.send = function (req, res) {
+    var smtpServer = req.body.smtpAddress;
+    var smtpUser = req.body.smtpUsername;
+    var smtpPassword = req.body.smtpPassword;
+    var transportObject = transportHelper.getSmtpTransport(smtpServer, smtpUser, smtpPassword);
+    var emailArray = emailHelpers.getEmailArray(requestHelpers.getHostName(req), req.body);
+    emailer.sendEmails(emailArray, req.body, transportObject, '', function (sendEmailResponse) {
+        res.send(sendEmailResponse);
     });
 };

@@ -2,10 +2,12 @@ var request = require('request');
 var emailHelpers = require('./email.helpers');
 var emailer = require('./emailer');
 var sessionHandler = require('./session.handler.js');
+var transportHelper = require(_ROOT + 'app/transport.helper.js');
+var requestHelpers = require(_ROOT + 'app/request.helpers.js');
 
 module.exports = {
     handle: function (req, res) {
-        var hostname =  req.protocol + '://' + req.get("host");
+        var hostname =  requestHelpers.getHostName(req);
         var form = {
             code: req.query.code,
             client_id: '421703536444-megt0e62oo4kjamdavcq451f61snfi70.apps.googleusercontent.com',
@@ -44,7 +46,9 @@ module.exports = {
                 var emailContent = emailHelpers.getEmailArray(hostname, emailFormParams);
                 emailFormParams['email-account'] = fromEmail;
                 emailFormParams['accessToken'] = accessToken;
-                emailer.sendEmails(emailContent, emailFormParams, 'Gmail', function(response){
+                var serviceName = 'Gmail';
+                var transportObject = transportHelper.getServiceTransport(serviceName, emailFormParams);
+                emailer.sendEmails(emailContent, emailFormParams, transportObject, serviceName, function(response){
                     sessionHandler.destroy(req);
                     res.render('send-email-response', response);
                 });
