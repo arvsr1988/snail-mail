@@ -7,19 +7,19 @@ var emailData = require('../functions/email_data');
 module.exports = {
     init: function () {
         $("#login-details").html(accountDetailsTemplate()).show();
-
-        var bindFormSubmit = function(){
+        var bindSmtpFormSubmit = function(){
             var sendEmails = function () {
                 event.preventDefault();
                 $("#send-email-response").html('').hide();
-                $("#send-spinner").show();
+                $(".smtp-submit-element").toggle();
                 $.ajax({
                     type : 'POST',
                     url: '/send-email',
                     data: $("#attribute-details").serialize() + '&' +  $("#email-details-form").serialize() + '&' + $("#smtp-account-details").serialize(),
                     success: function (data) {
                         $("#smtp-email-response").html(responseTemplate(data)).show();
-                        $("#send-spinner").hide();
+                        $("body").scrollTop($("#smtp-email-response").offset().top - 5);
+                        $(".smtp-submit-element").toggle();
                         return false;
                     }
                 });
@@ -37,7 +37,7 @@ module.exports = {
         };
 
         this.bindGmailLogin();
-        bindFormSubmit();
+        bindSmtpFormSubmit();
     },
 
     bindGmailLogin : function(){
