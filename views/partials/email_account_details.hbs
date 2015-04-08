@@ -1,16 +1,19 @@
+<ul>
+    <li>
 <div>
 <p>Sign in with Gmail to send your emails</p>
 <a id="gmail-login-link" href="https://accounts.google.com/o/oauth2/auth?response_type=code&scope=profile%20email%20https://mail.google.com/%20profile&client_id=421703536444-megt0e62oo4kjamdavcq451f61snfi70.apps.googleusercontent.com">
     <img src="//i.imgur.com/9T3Okpa.png?1" width="300" alt="sign in with google"/>
 </a>
 </div>
-
+    </li>
+    <li>
 <div id="smtp-form-container">
-    <p class="smtp-form-header">Send using SMTP (i.e. Amazon SES)</p>
-    <div id="smtp-form-body">
+    <p id="smtp-form-header">Send your emails using a SMTP server (like Amazon SES)</p>
+    <div id="smtp-form-body" class="hide">
     <form id="smtp-account-details">
         <input id="smtpAddress" type="text" placeholder="SMTP Server Address" name="smtpAddress" />
-        <input id="senderEmail" type="text" placeholder="From Email" name="email-account" />
+        <input id="senderEmail" type="text" placeholder="Your Email" name="email-account" />
         <input id="smtpUserName" type="text" placeholder="SMTP username" name="smtpUsername" />
         <input id="smtpPassword" type="password" placeholder="SMTP password" name="smtpPassword" />
         <button id="submitAccountDetails" class="smtp-submit-element">Send emails</button><img id="send-spinner" class="smtp-submit-element hide" src="/images/spinner.gif" height="30"/>
@@ -18,3 +21,5 @@
     </div>
     <div id="smtp-email-response"></div>
 </div>
+    </li>
+</ul>
