@@ -40,6 +40,9 @@ a:hover {
     border: none;
     cursor: pointer;
     margin: 5px 0px;
+    &:hover {
+      background : #195573;
+    }
   }
 
   textarea {
@@ -97,14 +100,23 @@ a:hover {
       &.remove-email-row {
         background-image: linear-gradient(#E63D4E, #C11A39);
         padding: 5px 20px;
+        &:hover {
+          background-image: linear-gradient(#C11A39, #AE1733);
+        }
       }
+
     }
     .preview-button {
       background: none;
       color: #666;
+      &:hover {
+        background : #eee; color : #333;
+      }
     }
     #add-email-row {
-      background-image: linear-gradient(#aaa, grey);
+      background-image: linear-gradient(#aaa, #8c8c8c);
+      &:hover {
+          background-image: linear-gradient(#808080, #555555); }
     }
   }
 
