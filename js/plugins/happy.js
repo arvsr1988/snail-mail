@@ -36,7 +36,7 @@
                 if (window.console) console.warn('would have submitted');
                 return false;
             }
-            if (isFunction(config.happy)) config.happy();
+            if (isFunction(config.happy)) return config.happy();
         }
         function handleMouseUp() {
             pauseMessages = false;

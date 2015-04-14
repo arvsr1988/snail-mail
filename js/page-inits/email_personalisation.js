@@ -57,8 +57,7 @@ module.exports = {
         };
 
         $("#submit-attributes").unbind('click');
-        $("#submit-attributes").click(function (event) {
-            event.preventDefault();
+        $("#submit-attributes").click(function () {
             var areEmailsValid = validEmails();
             if(!areEmailsValid){
                 alert("enter valid emails!");
@@ -68,6 +67,7 @@ module.exports = {
             $("#empty-attributes").toggle(anyAttributeEmpty);
             login.init();
             flow.moveTo("login-details");
+            return false;
         });
     },
     bindRowManipulation : function(attributes){

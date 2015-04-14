@@ -14,7 +14,6 @@ var handleSendEmailResponse = function(data){
 
 var bindSmtpFormSubmit = function(){
     var sendEmails = function () {
-        event.preventDefault();
         $("#send-email-response").html('').hide();
         $(".smtp-submit-element").toggle();
         $.ajax({

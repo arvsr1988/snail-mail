@@ -24,7 +24,6 @@ module.exports = {
 
 
         var validateEmails = function(){
-            event.preventDefault();
             var emailsValid = csvEmailsValid($("#csv-recipients").val(), emailPersonalisation.init, emailPersonalisation);
             var fileUploadValid = fileUploadHandler.validateUpload($("#email-attributes-file"), emailPersonalisation.init, emailPersonalisation);
             if(!emailsValid && !fileUploadValid){
