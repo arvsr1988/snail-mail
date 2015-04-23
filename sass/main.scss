@@ -25,10 +25,6 @@ a:hover {
     border-radius: 3px;
     padding: 3px;
   }
-  input[type='checkbox'] {
-    width: initial;
-    display: initial;
-  }
   button {
     background: #2A8EC0;
     color: #fff;
@@ -58,6 +54,26 @@ a:hover {
   }
 
   #email-details {
+    div.tooltip-container {
+      display : inline;
+    }
+    img.help-icon, img.small-help-icon {
+      height: 25px;
+      vertical-align:  middle;
+      margin-top: -8px;
+      padding-left: 3px;
+    }
+    img.small-help-icon {
+      height : 20px;
+    }
+    #email-details-form {
+      input {
+        width : 90%; display : inline;
+      }
+      input[type='checkbox'] {
+        width: initial;
+        display: initial;
+      }
     #email-details-container {
       width: 100%;
       overflow: auto;
@@ -78,6 +94,7 @@ a:hover {
         display: table-cell;
         vertical-align: middle;
       }
+    }
     }
   }
 
