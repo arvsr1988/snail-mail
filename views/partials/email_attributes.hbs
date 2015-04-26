@@ -1,5 +1,10 @@
 <h3>Your email template</h3>
-<div id="email-template-preview">{{{emailContent}}}</div>
+<div id="email-template-preview">
+<div class="label">Subject</div>
+<div id="email-subject-preview" class="attribute-data">{{{subject}}}</div>
+<div class="label">Text</div>
+<div id="email-template-preview" class="attribute-data">{{{emailContent}}}</div>
+</div>
 <form id="attribute-details" name="whatever1">
 <table id="email-attribute-table">
     <tr>

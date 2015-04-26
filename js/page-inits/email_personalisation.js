@@ -33,7 +33,7 @@ module.exports = {
             });
         });
         var emailContentHtml = emailPersonalisation.getHTMLFromText(emailContent);
-        $('#enter-attributes').html(emailAttributesTemplate({emailContent: emailContentHtml, emailAttributes : attributes, attributeRows : attributeViewData})).show();
+        $('#enter-attributes').html(emailAttributesTemplate({subject : $("#subject").val(), emailContent: emailContentHtml, emailAttributes : attributes, attributeRows : attributeViewData})).show();
     },
 
     bindFormSubmit: function () {
