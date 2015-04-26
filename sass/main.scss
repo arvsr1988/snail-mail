@@ -10,6 +10,15 @@ a:hover {
   color: initial !important;
 }
 
+.email-preview-overlay {
+  .label {
+    color : #bbb;
+    padding-bottom : 5px;
+  }
+  .data {
+    margin-bottom : 20px;
+  }
+}
 #container {
   margin: 0 auto;
   max-width: 960px;

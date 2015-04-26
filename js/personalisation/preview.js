@@ -17,7 +17,14 @@ var init = function(){
         var text = $("#email-content").val();
         var personalisationData = [attributeMap];
         var attributeData = emailPersonalisation.getEmails(window.location.hostname, options, subject, text, personalisationData);
-        picoModal(previewTemplate(attributeData[0])).show();
+        picoModal(
+            {
+                'width': '50%',
+                'max-width' : '600px',
+                'content' : previewTemplate(attributeData[0]),
+                modalClass : 'email-preview-overlay'
+            }
+        ).show();
         return false;
     });
 };
