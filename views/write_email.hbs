@@ -15,7 +15,12 @@
                 <img class="small-help-icon" src="/images/help.png" rel="tooltip" title='To write "Hello John" or "Hello Amy" in different emails, put "Hello ${name}" in the text. You can customise each name in the next step' />
             </p>
             <div class="tooltip-container" rel="tooltip" title="You can personalise the subject too!"><input id="subject" name="subject" placeholder="Subject" /></div><img class="help-icon" src="/images/help.png" rel="tooltip" title="You can personalise the subject too!" />
-            <textarea id="email-content" name="email-content" placeholder="Email text"></textarea>
+            <div id="email-content-container">
+                <div class="sink">
+                    <button type="button" class="add-tag-control" data-element="#email-content">add a tag</button>
+                </div>
+                <textarea id="email-content" name="email-content" placeholder="Email text"></textarea>
+            </div>
             <div id="email-details-container">
                 <div id="csv-emails-container">
                     <textarea id="csv-recipients" placeholder="Emails of the recipients (comma separated)"></textarea>

@@ -1,3 +1,6 @@
+@import 'sink.scss';
+@import 'form_controls';
+
 * {
   font-family: 'Helvetica', Arial, sans-serif;;
 }
@@ -34,21 +37,6 @@ a:hover {
     border-radius: 3px;
     padding: 3px;
   }
-  button {
-    background: #2A8EC0;
-    color: #fff;
-    border-radius: 5px;
-    padding: 10px;
-    font-size: 14pt;
-    -webkit-appearance: none;
-    appearance: none;
-    border: none;
-    cursor: pointer;
-    margin: 5px 0px;
-    &:hover {
-      background : #195573;
-    }
-  }
 
   textarea {
     height: 100px;
@@ -82,6 +70,11 @@ a:hover {
       input[type='checkbox'] {
         width: initial;
         display: initial;
+      }
+      #email-content-container {
+        #email-content {
+          margin-top : 0px;
+        }
       }
     #email-details-container {
       width: 100%;

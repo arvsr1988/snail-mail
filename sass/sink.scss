@@ -1,0 +1,16 @@
+.sink {
+  border : 1px solid #ccc;
+  border-bottom : none;
+  button {
+    font-size:  12pt;
+    padding:  5px;
+    background-color: white;
+    border: 1px solid grey;
+    color:  black;
+    margin-left:  10px;
+    border-radius: 4px;
+    &:hover {
+      background-color : #ccc;
+    }
+  }
+}

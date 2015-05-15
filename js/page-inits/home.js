@@ -2,6 +2,8 @@ var emailPersonalisation = require('./email_personalisation.js');
 var emailFunctions = require('../functions/email.functions.js');
 var fileUploadHandler = require('../personalisation/file.upload.handler.js');
 var flow = require('./flow');
+var sink = require('../personalisation/sink');
+
 module.exports = {
     init : function() {
         var csvEmailsValid = function(csvEmailString, callback, context){
@@ -40,6 +42,7 @@ module.exports = {
             },
             happy : validateEmails
         });
+        sink.init();
         flow.bind();
     }
 };
