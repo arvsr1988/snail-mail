@@ -18,7 +18,7 @@ var config       =
     // A separate bundle will be generated for each
     // bundle config in the list below
     bundleConfigs: [{
-        entries: './js/main.js',
+        entries: './js/home.js',
         dest: global._publicDir,
         outputName:  'bundle.js',
         // Additional file extentions to make optional
