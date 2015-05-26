@@ -3,6 +3,7 @@ var emailFunctions = require('./functions/email.functions.js');
 var fileUploadHandler = require('./personalisation/file.upload.handler.js');
 var flow = require('./page-inits/flow');
 var sink = require('./personalisation/sink');
+var toggle = require('./toggles');
 
 var init = function () {
     var csvEmailsValid = function (csvEmailString, callback, context) {
@@ -35,7 +36,6 @@ var init = function () {
 
     $("#email-details-form").isHappy({
         fields: {
-            '#from-name': {required: true, message: 'Please enter your name'},
             '#email-content': {required: true, message: 'Please enter some text'}
         },
         happy: validateEmails
@@ -45,4 +45,5 @@ var init = function () {
 };
 $(document).ready(function () {
     init();
+    toggle.init();
 });

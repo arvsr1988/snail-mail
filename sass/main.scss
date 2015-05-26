@@ -15,13 +15,14 @@ a:hover {
 
 .email-preview-overlay {
   .label {
-    color : #bbb;
-    padding-bottom : 5px;
+    color: #bbb;
+    padding-bottom: 5px;
   }
   .data {
-    margin-bottom : 20px;
+    margin-bottom: 20px;
   }
 }
+
 #container {
   margin: 0 auto;
   max-width: 960px;
@@ -31,16 +32,14 @@ a:hover {
   input, textarea {
     display: block;
     width: 100%;
-    font-size: 14pt;
+    font-size: 12pt;
     margin: 5px 0px;
     border: 1px solid #ccc;
     border-radius: 3px;
     padding: 3px;
   }
 
-  textarea {
-    height: 100px;
-  }
+
   .unhappyMessage {
     color: red;
     display: block;
@@ -52,20 +51,29 @@ a:hover {
 
   #email-details {
     div.tooltip-container {
-      display : inline;
+      display: inline;
     }
     img.help-icon, img.small-help-icon {
       height: 25px;
-      vertical-align:  middle;
+      vertical-align: middle;
       margin-top: -8px;
       padding-left: 3px;
     }
     img.small-help-icon {
-      height : 20px;
+      height: 20px;
     }
     #email-details-form {
       input {
-        width : 90%; display : inline;
+        width: 90%;
+        display: inline;
+      }
+      textarea {
+        height: 75px;
+      }
+      label {
+        display : block;
+        color : #555;
+        padding-top : 5px;
       }
       input[type='checkbox'] {
         width: initial;
@@ -73,47 +81,58 @@ a:hover {
       }
       #email-content-container {
         #email-content {
-          margin-top : 0px;
+          margin-top: 0px;
         }
       }
-    #email-details-container {
-      width: 100%;
-      overflow: auto;
-      display: table;
+      #email-details-container {
+        width: 100%;
+        overflow: auto;
+        display: table;
 
-      #csv-emails-container {
-        width: 40%;
-        display: table-cell;
+        #csv-emails-container {
+          width: 40%;
+          display: table-cell;
+        }
+        #or-container {
+          width: 10%;
+          display: table-cell;
+          vertical-align: middle;
+          text-align: center;
+        }
+        #file-upload-container {
+          width: 40%;
+          display: table-cell;
+          vertical-align: middle;
+        }
       }
-      #or-container {
-        width: 10%;
-        display: table-cell;
-        vertical-align: middle;
-        text-align: center;
+
+      #more-options-text, #hide-options-text {
+        cursor: pointer;
+        margin: 15px 0px;
+        border-bottom: 1px solid #ddd;
+        color: rgb(85, 85, 85);
       }
-      #file-upload-container {
-        width: 40%;
-        display: table-cell;
-        vertical-align: middle;
+      #optional-attributes {
+        margin-bottom: 10px;
       }
-    }
+
     }
   }
 
   #enter-attributes {
     #email-template-preview {
-      $rowBorder : 1px solid #eee;
+      $rowBorder: 1px solid #eee;
       border-top: $rowBorder;
       border-bottom: $rowBorder;
       margin: 0;
       padding: 15px 0px;
       margin: 10px 0px;
       .label {
-        color : #bbb;
-        padding-bottom : 5px;
+        color: #bbb;
+        padding-bottom: 5px;
       }
       .attribute-data {
-        padding-bottom : 10px;
+        padding-bottom: 10px;
       }
     }
 
@@ -137,13 +156,15 @@ a:hover {
       background: none;
       color: #666;
       &:hover {
-        background : #eee; color : #333;
+        background: #eee;
+        color: #333;
       }
     }
     #add-email-row {
       background-image: linear-gradient(#aaa, #8c8c8c);
       &:hover {
-          background-image: linear-gradient(#808080, #555555); }
+        background-image: linear-gradient(#808080, #555555);
+      }
     }
   }
 
@@ -219,7 +240,7 @@ a:hover {
   }
 
   #login-details {
-    #smtp-form-header{
+    #smtp-form-header {
       color: #2A8EC0;
       cursor: pointer;
     }

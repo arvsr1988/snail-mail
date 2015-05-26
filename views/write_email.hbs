@@ -9,20 +9,22 @@
 </div>
 <div id="email-details" class="flow">
     <form id="email-details-form">
-        <div class="tooltip-container"  rel="tooltip" title="Your name as you want recipients to see it."><input id="from-name" name="from-name" placeholder="From (your name)"/></div><img class="help-icon" src="/images/help.png" rel="tooltip" title="Your name as you want recipients to see it." />
         <p class="personalise-text">Personalise your email by using putting tags (use ${tagName} in the text) where you want to personalise.
             <img class="small-help-icon" src="/images/help.png" rel="tooltip" title='To write "Hello John" or "Hello Amy" in different emails, put "Hello ${name}" in the text. You can customise each name in the next step' />
         </p>
-        <div class="tooltip-container" rel="tooltip" title="You can personalise the subject too!"><input id="subject" name="subject" placeholder="Subject" /></div><img class="help-icon" src="/images/help.png" rel="tooltip" title="You can personalise the subject too!" />
+
+        <div class="tooltip-container" rel="tooltip" title="You can personalise the subject too!"><label for="subject">Subject</label><input id="subject" name="subject"/></div><img class="help-icon" src="/images/help.png" rel="tooltip" title="You can personalise the subject too!" />
+        <label for="email-content">Email Text</label>
         <div id="email-content-container">
             <div class="sink">
                 <button type="button" class="add-tag-control" data-element="#email-content">add a tag</button>
             </div>
-            <textarea id="email-content" name="email-content" placeholder="Email text"></textarea>
+            <textarea id="email-content" name="email-content"></textarea>
         </div>
+        <label for="csv-recipients">Email addresses</label>
         <div id="email-details-container">
             <div id="csv-emails-container">
-                <textarea id="csv-recipients" placeholder="Emails of the recipients (comma separated)"></textarea>
+                <textarea id="csv-recipients" placeholder="comma seperated addresses"></textarea>
             </div>
             <div id="or-container">
                 OR
@@ -32,11 +34,16 @@
                 <img class="help-icon" src="/images/help.png" />
             </div>
         </div>
-        <div class="tooltip-container" rel="tooltip" title="Optional : the email address you want replies to be sent to" ><input id="replyTo" name="replyTo" placeholder="Reply to Email Address" /></div>
-        <img class="help-icon" src="/images/help.png"  rel="tooltip" title="Optional : the email address you want replies to be sent to"/>
-        <div>
+        <div style="margin-top : 10px;">
             <input id="includeSignature" name="include-signature" type="checkbox" />
-            <label for="includeSignature">Add a link to this website in my email signature.</label><br />
+            <label style="display : initial;" for="includeSignature">Add a link to this website in my email signature.</label><br />
+        </div>
+        <div id="more-options-text" class="toggle-element" data-toggle="#optional-attributes, #hide-options-text">More Options</div>
+        <div id="optional-attributes" style="display : none;">
+            <div id="hide-options-text"  style="display : none;" class="toggle-element" data-toggle="#optional-attributes, #more-options-text">Hide</div>
+            <div class="tooltip-container"  rel="tooltip" title="Your name as you want recipients to see it."><input id="from-name" name="from-name" placeholder="From (your name)"/></div><img class="help-icon" src="/images/help.png" rel="tooltip" title="Your name as you want recipients to see it." />
+            <div class="tooltip-container" rel="tooltip" title="Optional : the email address you want replies to be sent to" ><input id="replyTo" name="replyTo" placeholder="Reply to Email Address" /></div>
+            <img class="help-icon" src="/images/help.png"  rel="tooltip" title="Optional : the email address you want replies to be sent to"/>
         </div>
         <button id="submit-button">Continue</button>
     </form>
