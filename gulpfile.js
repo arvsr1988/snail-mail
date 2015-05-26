@@ -1,7 +1,5 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
-var browserify = require('gulp-browserify');
-var concat = require('gulp-concat');
 var runSequence = require('run-sequence');
 var rimraf = require('gulp-rimraf');
 var rev = require("gulp-rev");
@@ -10,20 +8,11 @@ var revReplace = require("gulp-rev-replace");
 var appDependencies = require('./package.json').dependencies;
 var buildDir = 'dist';
 var publicDir = buildDir + '/public';
-
+global._publicDir = publicDir;
+require('./gulp-browserify-task');
 gulp.task('sass', function(){
     return gulp.src('sass/*.scss')
         .pipe(sass())
-        .pipe(gulp.dest(publicDir))
-});
-
-gulp.task('browserify', function(){
-     return gulp.src('js/*.js')
-        .pipe(browserify({
-            "transform": ["hbsfy"]
-            }
-        ))
-        .pipe(concat('bundle.js'))
         .pipe(gulp.dest(publicDir))
 });
 
