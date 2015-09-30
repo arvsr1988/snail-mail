@@ -6,6 +6,7 @@ var sink = require('./personalisation/sink');
 var toggle = require('./toggles');
 
 var init = function () {
+    //this shouldn't be accepting a callback function! Its a synchronous method! :@
     var csvEmailsValid = function (csvEmailString, callback, context) {
         if (!csvEmailString || csvEmailString.length === 0) {
             return false;

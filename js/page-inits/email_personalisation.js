@@ -11,10 +11,6 @@ module.exports = {
     init: function (attributeData) {
         var attributes = ['email'];
         attributes = attributes.concat(emailFunctions.getAttributes($('#email-content').val(), $("#subject").val()));
-        if (attributes.length === 0) {
-            login.init();
-            return false;
-        }
         this.renderView(attributes, attributeData);
         this.bindRowManipulation(attributes);
         this.bindFormSubmit();
