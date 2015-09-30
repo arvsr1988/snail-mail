@@ -18,8 +18,7 @@ module.exports = {
     },
 
     renderView: function (attributes, attributeData) {
-        $(".flow").hide();
-        $("#enter-attributes").show();
+        flow.moveTo("enter-attributes");
         var emailContent = $("#email-content").val();
         var attributeViewData = [];
         attributeData.forEach(function(row, rowIndex){
