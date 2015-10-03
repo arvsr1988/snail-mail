@@ -72,7 +72,7 @@ a:hover {
       }
       label {
         display : block;
-        color : #555;
+        color : grey;
         padding-top : 5px;
       }
       input[type='checkbox'] {
@@ -170,70 +170,32 @@ a:hover {
 
   #flow-container {
     #breadcrumb {
-      list-style: none;
       overflow: hidden;
       font: 18px Helvetica, Arial, Sans-Serif;
-      padding-left: 0px;
+      padding-left : 0px;
       li {
-        $color: #94C6E0;
-        float: left;
-        color: white;
+        display : block;
         text-decoration: none;
-        padding: 10px 0 10px 55px;
-        background: $color;
+        margin-right : 30px;
         position: relative;
-        display: block;
-        $border-after: 30px solid;
         cursor: pointer;
-        &:after {
-          content: " ";
-          display: block;
-          width: 0;
-          height: 0;
-          border-top: 50px solid transparent; /* Go big on the size, and let overflow hide */
-          border-bottom: 50px solid transparent;
-          border-left: $border-after $color;
-          position: absolute;
-          top: 50%;
-          margin-top: -50px;
-          left: 100%;
-          z-index: 2;
-        }
-        &:before {
-          content: " ";
-          display: block;
-          width: 0;
-          height: 0;
-          border-top: 50px solid transparent; /* Go big on the size, and let overflow hide */
-          border-bottom: 50px solid transparent;
-          border-left: 30px solid white;
-          position: absolute;
-          top: 50%;
-          margin-top: -50px;
-          margin-left: 1px;
-          left: 100%;
-          z-index: 1;
-        }
-        &:hover {
-          background: black !important;
-        }
-        &:hover:after {
-          border-left-color: black !important;
-        }
-
+        color : #ccc;
+        padding-bottom : 5px;
         &.clickable {
-          $color: #2A8EC0;
-          background: $color;
-          &:after {
-            border-left: $border-after $color;
+          color : #195573;
+          &:hover {
+            color : black !important;
           }
         }
         &.selected {
-          $color: #195573;
-          background: $color;
-          &:after {
-            border-left: $border-after $color;
-          }
+          color:#2A8EC0;
+          border-bottom : 1px solid #2A8EC0;
+          margin-bottom : 3px;
+        }
+      }
+      @media (min-width : 600px){
+        li {
+          display : inline;
         }
       }
     }
