@@ -4,6 +4,7 @@
  This task is set up to generate multiple separate bundles, from
  different sources, and to use Watchify when run from the default task.
  See browserify.bundleConfigs in gulp/config.js
+ //borrowed from https://github.com/vigetlabs/gulp-starter
  */
 
 var browserify   = require('browserify');
@@ -20,20 +21,16 @@ var config       =
     bundleConfigs: [{
         entries: './js/home.js',
         dest: global._publicDir,
-        outputName:  'bundle.js',
+        outputName: 'bundle.js',
         // Additional file extentions to make optional
         extensions: ['.hbs']
-        // list of modules to make require-able externally
-        //require: ['jquery', 'backbone/node_modules/underscore']
-        // See https://github.com/greypants/gulp-starter/issues/87 for note about
-        // why this is 'backbone/node_modules/underscore' and not 'underscore'
-    },/*, {
-         entries: src + '/javascript/page.js',
-         dest: dest,
-         outputName: 'page.js',
-         // list of externally available modules to exclude from the bundle
-         external: ['jquery', 'underscore']
-         }*/]
+    },
+    {
+        entries: './js/send_email_response.js',
+        dest: global._publicDir,
+        outputName: 'send_email_response.js'
+
+    }]
 };
 
 var browserifyTask = function(devMode) {

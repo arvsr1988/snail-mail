@@ -2,6 +2,7 @@ var accountDetailsTemplate = require('../../views/partials/email_account_details
 var urlHelpers = require('../functions/url.helpers');
 var emailData = require('../functions/email_data');
 var sendViaSmtp = require('../email_sending/send_via_smtp');
+var tracking = require('../tracking');
 
 module.exports = {
     init: function () {
@@ -18,6 +19,7 @@ module.exports = {
                 if(!successful){
                     alert("Oops, something went wrong. Please try again");
                 }
+                tracking.track('gmailLoginClick');
                 window.location.href = url + "&redirect_uri=" + encodeURIComponent(urlHelpers.getHost() + "/googleOuathResponse");
             });
             return false;

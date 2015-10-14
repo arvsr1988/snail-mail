@@ -7,6 +7,7 @@ Handlebars.registerPartial('email_attribute_row', require('../../views/partials/
 var flow = require('./flow');
 var emailPreview = require('../personalisation/preview');
 var emailPersonalisation = require('../../app/email.personalisation');
+var tracking = require('../tracking');
 module.exports = {
     init: function (attributeData) {
         var attributes = ['email'];
@@ -62,6 +63,7 @@ module.exports = {
             $("#empty-attributes").toggle(anyAttributeEmpty);
             login.init();
             flow.moveTo("login-details");
+            tracking.track('submitPersonalisation', $("#attribute-details input[name=email]").length);
             return false;
         });
     },

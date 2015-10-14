@@ -1,11 +1,13 @@
 var responseTemplate = require('../../views/send-email-response.hbs');
 var Handlebars = require("hbsfy/runtime");
 Handlebars.registerPartial('send_email_status', require('../../views/partials/send_email_status.hbs'));
+var tracking = require('../tracking');
 
 var handleSendEmailResponse = function(data){
     $(".smtp-submit-element").toggle();
     if(data.successful){
         document.forms["smtp-account-details"].reset();
+        tracking.track('smtpEmailsSent');
     }
     $("#smtp-email-response").html(responseTemplate(data)).show();
     $("body").scrollTop($("#smtp-email-response").offset().top - 5);

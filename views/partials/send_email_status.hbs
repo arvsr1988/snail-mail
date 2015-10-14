@@ -1,5 +1,6 @@
 {{#if emails}}
 {{#if successful}}
+    <input id="emailsSent" type="hidden" value="1" />
     <p>Your emails have been sent</p>
     {{#if sentEmailLink}}
     <p>You can <a href="{{sentEmailLink}}" target="_blank">check your sent email</a> to see if your emails were sent as you wanted.</p>

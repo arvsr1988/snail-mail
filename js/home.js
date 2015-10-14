@@ -4,6 +4,7 @@ var fileUploadHandler = require('./personalisation/file.upload.handler.js');
 var flow = require('./page-inits/flow');
 var sink = require('./personalisation/sink');
 var toggle = require('./toggles');
+var tracking = require('./tracking');
 
 var init = function () {
     //this shouldn't be accepting a callback function! Its a synchronous method! :@
@@ -32,6 +33,7 @@ var init = function () {
             alert("Enter emails or upload a proper file");
             return false;
         }
+        tracking.track('detailsEntered');
         return false;
     };
 

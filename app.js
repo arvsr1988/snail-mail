@@ -4,7 +4,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var express = require('express');
 var session = require('express-session');
-var methodOverride = require('method-override');
 var app = express();
 global._ROOT = __dirname + '/';
 var handlebarFactory = require('./app/handlebar.factory.js');
