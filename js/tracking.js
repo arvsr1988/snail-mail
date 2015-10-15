@@ -4,7 +4,7 @@ var track = function(eventAction, eventValue){
         eventCategory: 'Email',
         eventAction: eventAction,
         eventLabel: 'Email Flow Tracking',
-        eventValue : ''
+        eventValue : parseInt(eventValue) || 0
     });
 };
 
