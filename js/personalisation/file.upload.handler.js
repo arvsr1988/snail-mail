@@ -3,7 +3,7 @@ var validateUpload = function(element, callback, context){
         return false;
     }
     var file = element.prop("files")[0];
-    if(file.type.indexOf("csv") === -1){
+    if(!file.type.match(/excel|csv/)){
         return false;
     }
     var reader = new FileReader();
@@ -22,6 +22,9 @@ var parseAttributes = function(stringifiedCSV){
     }
 
     var attributeNames = attributeRows.splice(0,1)[0].split(",");
+    attributeNames.forEach(function(attrName,index){
+       attributeNames[index] = attrName.trim();
+    });
     var attributeHash = [];
     attributeRows.forEach(function(row, rowIndex){
         var rowValueArray = row.split(",");
