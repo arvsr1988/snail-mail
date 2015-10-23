@@ -11,7 +11,7 @@ module.exports = {
         var successful = true;
         var emailStatusArray = [];
         var shouldEmailResponse = emailArray.length > 10;
-        async.each(emailArray,
+        async.eachSeries(emailArray,
             function(email, callback) {
                 var mailOptions = {
                     from: commonAttributes['from-name'] + '<' + fromEmail + '>',
