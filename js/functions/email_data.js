@@ -1,15 +1,17 @@
-module.exports = {
-    save : function(serializedForm, callback){
-        $.ajax({
-            url : '/saveEmailData',
-            type : 'POST',
-            data : serializedForm,
-            success : function(){
-                callback(true);
-            },
-            error : function(){
-                callback(false);
-            }
-        });
-    }
+var emailDataKey = "emailData";
+
+var save = function(serializedForm){
+    localStorage.setItem(emailDataKey, serializedForm);
 };
+
+var getEmailData = function(){
+    return localStorage.getItem(emailDataKey);
+};
+
+var removeEmailData = function(){
+    localStorage.removeItem(emailDataKey);
+};
+
+exports.getEmailData = getEmailData;
+exports.save = save;
+exports.removeEmailData = removeEmailData;

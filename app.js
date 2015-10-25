@@ -3,7 +3,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var express = require('express');
-var session = require('express-session');
 var app = express();
 global._ROOT = __dirname + '/';
 var handlebarFactory = require('./app/handlebar.factory.js');
@@ -25,21 +24,13 @@ app.set('trust proxy', 'loopback');
 //routes
 var writeEmail = require('./routes/write.email.js');
 var sendEmail =  require('./routes/send.email.js');
-var googleOauthResponse = require('./routes/google.oauth.response.js');
-var emailData = require('./routes/email.data.js');
-
-app.use(session({
-    secret: 'asdfsa',
-    resave: false,
-    saveUninitialized: true,
-    proxy : true,
-    unset : 'destroy'
-}));
+var sendGmailEmails = require('./routes/send_via_gmail.js');
+var googleOauthResponse = require(_ROOT + './routes/google_oauth_response');
 
 app.get("/", writeEmail.show);
 app.post('/send-email', sendEmail.send);
-app.post('/saveEmailData', emailData.save);
-app.get('/googleOuathResponse', googleOauthResponse.handle);
+app.post('/send-gmail-emails', sendGmailEmails.handle);
+app.get('/googleOauthResponse', googleOauthResponse.handle);
 
 app.use(function(err, req, res, next){
     console.error(err.stack);

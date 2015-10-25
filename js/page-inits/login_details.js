@@ -15,13 +15,9 @@ module.exports = {
         $("#gmail-login-link").click(function(){
             var url = $(this).attr("href");
             var serializedFormDetails = $("#attribute-details").serialize() + '&' +  $("#email-details-form").serialize();
-            emailData.save(serializedFormDetails, function(successful){
-                if(!successful){
-                    alert("Oops, something went wrong. Please try again");
-                }
-                tracking.track('gmailLoginClick');
-                window.location.href = url + "&redirect_uri=" + encodeURIComponent(urlHelpers.getHost() + "/googleOuathResponse");
-            });
+            emailData.save(serializedFormDetails);
+            tracking.track('gmailLoginClick');
+            window.location.href = url + "&redirect_uri=" + encodeURIComponent(urlHelpers.getHost() + "/googleOauthResponse");
             return false;
         });
     }

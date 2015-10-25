@@ -24,13 +24,13 @@ var config       =
         outputName: 'bundle.js',
         // Additional file extentions to make optional
         extensions: ['.hbs']
-    },
-    {
-        entries: './js/send_email_response.js',
-        dest: global._publicDir,
-        outputName: 'send_email_response.js'
-
-    }]
+        },
+        {
+            entries: './js/sending_via_gmail.js',
+            dest: global._publicDir,
+            outputName: 'sending_via_gmail.js'
+        }
+    ]
 };
 
 var browserifyTask = function(devMode) {
@@ -90,7 +90,7 @@ var browserifyTask = function(devMode) {
 };
 
 gulp.task('browserify', function() {
-    return browserifyTask()
+    return browserifyTask();
 });
 
 // Exporting the task so we can call it directly in our watch task, with the 'devMode' option

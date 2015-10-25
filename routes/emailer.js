@@ -42,7 +42,7 @@ module.exports = {
                     finalCallback({successful : successful, emails : emailStatusArray, sentEmailLink : sentEmailLinks[serviceName]});
                 } else {
                     var hbs = handlebarFactory.getInstance();
-                    hbs.render(_ROOT + 'views/partials/send_email_status.hbs', {successful : successful, emails : emailStatusArray, sentEmailLink : sentEmailLinks[serviceName]}).then(
+                    hbs.render(_ROOT + 'views/partials/send_email_status.hbs', {successful : successful, emails : emailStatusArray,  sentEmailLink : sentEmailLinks[serviceName]}).then(
                     function(html){
                         var mailOptions = {
                             from: '<' + fromEmail + '>',
