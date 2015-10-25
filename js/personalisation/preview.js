@@ -22,7 +22,8 @@ var init = function(){
                 'width': '50%',
                 'max-width' : '600px',
                 'content' : previewTemplate(attributeData[0]),
-                modalClass : 'email-preview-overlay'
+                modalClass : 'email-preview-overlay',
+                height : '75%'
             }
         ).show();
         return false;

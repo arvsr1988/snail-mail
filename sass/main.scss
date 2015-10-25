@@ -14,12 +14,15 @@ a:hover {
 }
 
 .email-preview-overlay {
-  .label {
-    color: #bbb;
-    padding-bottom: 5px;
-  }
-  .data {
-    margin-bottom: 20px;
+  #email-preview-container {
+    overflow : scroll; height : 100%;
+    .label {
+      color: #bbb;
+      padding-bottom: 5px;
+    }
+    .data {
+      margin-bottom: 20px;
+    }
   }
 }
 
