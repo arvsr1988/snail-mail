@@ -14,8 +14,33 @@ a:hover {
 }
 
 .email-preview-overlay {
+  #email-preview-header {
+    float : left;
+    overflow : auto;
+    width : 100%;
+    border-bottom : 1px solid #ddd;
+    .preview-header-element {
+      float : left;
+    }
+    .title {
+      text-align : center;
+      width : 80%;
+    }
+    .link {
+      width : 10%;
+      padding-top : 25px;
+      .clickable {
+        text-decoration : underline;
+        cursor : pointer;
+        &:hover {
+        text-decoration: none;
+        }
+      }
+    }
+  }
   #email-preview-container {
-    overflow : scroll; height : 100%;
+    clear : both;
+    padding-top : 20px;
     .label {
       color: #bbb;
       padding-bottom: 5px;
