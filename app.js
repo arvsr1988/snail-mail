@@ -38,7 +38,22 @@ app.use(function(err, req, res, next){
 });
 
 module.exports = app;
-var server = http.createServer(app);
-server.listen(app.get('port'), function () {
-    console.log('Express server listening on port ' + app.get('port'));
-});
+
+var cluster = require('cluster');
+var numCPUs = require('os').cpus().length;
+
+if (cluster.isMaster && process.env.NODE_ENV==="production") {
+    // Fork workers.
+    for (var i = 0; i < numCPUs; i++) {
+        cluster.fork();
+    }
+
+    cluster.on('exit', function(worker, code, signal) {
+        console.log('worker ' + worker.process.pid + ' died');
+    });
+} else {
+    var server = http.createServer(app);
+    server.listen(app.get('port'), function () {
+        console.log('Express server listening on port ' + app.get('port'));
+    });
+}
