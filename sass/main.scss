@@ -130,7 +130,12 @@ a:hover {
         #file-upload-container {
           width: 40%;
           display: table-cell;
-          vertical-align: middle;
+          vertical-align: top;
+          padding-top : 12px;
+          #sampleAttributeFile {
+            font-size: 11pt;
+            padding-left: 12px;
+          }
         }
       }
 
