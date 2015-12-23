@@ -8,10 +8,10 @@ var flow = require('./flow');
 var emailPreview = require('../personalisation/preview');
 var emailPersonalisation = require('../../app/email.personalisation');
 var tracking = require('../tracking');
+var writeEmailViewModel = require('../view_models/write_email');
 module.exports = {
     init: function (attributeData) {
-        var attributes = ['email'];
-        attributes = attributes.concat(emailFunctions.getAttributes($('#email-content').val(), $("#subject").val()));
+        var attributes = writeEmailViewModel.getAttributesFromView();
         this.renderView(attributes, attributeData);
         this.bindRowManipulation(attributes);
         this.bindFormSubmit();

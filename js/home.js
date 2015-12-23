@@ -5,6 +5,7 @@ var flow = require('./page-inits/flow');
 var sink = require('./personalisation/sink');
 var toggle = require('./toggles');
 var tracking = require('./tracking');
+var sampleFileDownload = require('./personalisation/sample_file_download.js');
 
 var init = function () {
     //this shouldn't be accepting a callback function! Its a synchronous method! :@
@@ -45,6 +46,7 @@ var init = function () {
     });
     sink.init();
     flow.bind();
+    sampleFileDownload.init();
 };
 $(document).ready(function () {
     init();
