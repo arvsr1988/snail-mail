@@ -1,4 +1,6 @@
-build/
 node_modules/
 .idea/
 dist/
+public/
+.sass-cache/
+npm-debug.log
