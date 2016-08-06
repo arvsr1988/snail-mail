@@ -14,10 +14,11 @@ var getEmails = function(hostname, options, subject, text, personalisationData){
     personalisationData.forEach(function(emailData){
         var email = {to : emailData['email']};
         email.text = getHTMLFromText(text.substring(0));
+        email.subject = subject;
         emailAttrs.forEach(function(attr){
             var attributeValue = emailData[attr];
             email.text = string.replaceAll(email.text, '${' + attr + '}', attributeValue);
-            email.subject = string.replaceAll(subject, '${' + attr + '}', attributeValue);
+            email.subject = string.replaceAll(email.subject, '${' + attr + '}', attributeValue);
         });
         emailArray.push(email);
     });
