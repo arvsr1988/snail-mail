@@ -135,6 +135,10 @@ a:hover {
           #sampleAttributeFile {
             font-size: 11pt;
             padding-left: 12px;
+            cursor : pointer;
+            &:hover {
+              text-decoration : underline;
+            }
           }
         }
       }
