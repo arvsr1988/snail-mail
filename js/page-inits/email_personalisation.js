@@ -9,6 +9,19 @@ var emailPreview = require('../personalisation/preview');
 var emailPersonalisation = require('../../app/email.personalisation');
 var tracking = require('../tracking');
 var writeEmailViewModel = require('../view_models/write_email');
+
+getEmailAttributeRowData = function(attributes, attributeData, rowIndexStart){
+  var attributeViewData = [];
+  rowIndexStart = rowIndexStart || 0;
+  attributeData.forEach(function(row, rowIndex){
+      attributeViewData.push({rowIndex : rowIndex + rowIndexStart, rowData : []});
+      attributes.forEach(function(attributeName){
+          attributeViewData[rowIndex].rowData.push({name : attributeName, value : row[attributeName] || ''});
+      });
+  });
+  return attributeViewData;
+}
+
 module.exports = {
     init: function (attributeData) {
         var attributes = writeEmailViewModel.getAttributesFromView();
@@ -21,13 +34,7 @@ module.exports = {
     renderView: function (attributes, attributeData) {
         flow.moveTo("enter-attributes");
         var emailContent = $("#email-content").val();
-        var attributeViewData = [];
-        attributeData.forEach(function(row, rowIndex){
-            attributeViewData[rowIndex] = [];
-            attributes.forEach(function(attributeName){
-                attributeViewData[rowIndex].push({name : attributeName, value : row[attributeName]});
-            });
-        });
+        var attributeViewData = getEmailAttributeRowData(attributes, attributeData);
         var emailContentHtml = emailPersonalisation.getHTMLFromText(emailContent);
         $('#enter-attributes').html(emailAttributesTemplate({subject : $("#subject").val(), emailContent: emailContentHtml, emailAttributes : attributes, attributeRows : attributeViewData})).show();
     },
@@ -70,14 +77,14 @@ module.exports = {
     bindRowManipulation : function(attributes){
         $("#email-attribute-table").on("click",".remove-email-row", function(){
             $(this).closest('tr').remove();
+            $(".preview-button").each(function(button){
+              $(this).data('index', button);
+            });
         });
         $("#add-email-row").unbind("click");
         $("#add-email-row").click(function(){
-            var attributeViewData = [];
-            attributes.forEach(function(row, index){
-                attributeViewData[index] = {name : row, value : ''};
-            });
-            $("#email-attribute-table").append(emailAttributeRowTemplate(attributeViewData));
+            var attributeViewData = getEmailAttributeRowData(attributes, [{email : ''}], $(".email-row").length);
+            $("#email-attribute-table tbody").append(emailAttributeRowTemplate(attributeViewData[0]));
             return false;
         });
     }

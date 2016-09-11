@@ -6,15 +6,15 @@ var init = function(){
         $('.preview-button[data-index="'+ index + '"]').click();
     };
     var bindPreviousAndNextButtons = function(currentIndex, modal){
-        $("#prev").click(function(){
+        $("#previous").unbind('click').click(function(){
             moveIndex(currentIndex - 1, modal);
         });
-        $("#next").click(function(){
+        $("#next").unbind('click').click(function(){
             moveIndex(currentIndex + 1, modal);
         });
     };
-    var previewButton = $(".preview-button");
-    previewButton.click(function(){
+    var emailTable = $("#email-attribute-table");
+    emailTable.on('click','.preview-button', function(){
         var closestRow = $(this).closest("tr").children();
         var attributeMap = {};
         $(closestRow).each(function(){

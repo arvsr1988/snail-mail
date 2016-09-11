@@ -6,7 +6,7 @@ var cssWatcher = watch('../sass');
 console.log("running watcher");
 
 jsWatcher.on('change', function(file){
-  console.log("js file changed");
+  console.log(JSON.stringify(new Date()) + "js file changed");
   shell.exec('npm run browserify')
 })
 
