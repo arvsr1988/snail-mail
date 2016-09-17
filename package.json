@@ -5,7 +5,7 @@
     "browserify": "browserify -t hbsfy js/home.js -o public/bundle.js && browserify  -t hbsfy js/sending_via_gmail.js -o public/sending_via_gmail.js",
     "sass": "node-sass sass/ -o public/",
     "build-dev": "mkdir -p public/ && (node build/copy_dev_files.js & npm run browserify & npm run sass)",
-    "prestart": "npm run build-dev",
+    "prestart-dev": "npm run build-dev",
     "start-dev": "node app.js",
     "watch" : "cd build/ && node watcher.js",
     "clean-artifact": "node build/clean_artifact.js",
