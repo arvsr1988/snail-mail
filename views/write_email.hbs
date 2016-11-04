@@ -9,17 +9,14 @@
 </div>
 <div id="email-details" class="flow">
     <form id="email-details-form">
-        <p class="personalise-text">Personalise your email by using putting tags (use ${tagName} in the text).<img class="small-help-icon" src="/images/help.png" rel="tooltip" title='To write "Hello John" or "Hello Amy" in different emails, put "Hello ${name}" in the text.' />
-
-        </p>
-
-        <div class="tooltip-container" rel="tooltip" title="You can personalise the subject too!"><label for="subject">Subject</label><input id="subject" name="subject"/></div><img class="help-icon" src="/images/help.png" rel="tooltip" title="You can personalise the subject too!" />
+        <p class="personalise-text">Personalise your email by using putting tags (use ${tagName} in the text).<img class="small-help-icon" src="/images/help.png" rel="tooltip" title='To write "Hello John" or "Hello Amy" in different emails, put "Hello ${name}" in the text.' /></p>
+        <label for="subject">Subject <img class="help-icon" src="/images/help.png" rel="tooltip" title="You can personalise the subject too!" /></label>
+        {{> sink element='#subject'}}
+        <input id="subject" name="subject"/>
         <label for="email-content">Email Text</label>
         <div id="email-content-container">
-            <div class="sink">
-                <button type="button" class="add-tag-control" data-element="#email-content">add a tag</button>
-            </div>
-            <textarea id="email-content" name="email-content"></textarea>
+          {{> sink element='#email-content'}}
+          <textarea id="email-content" name="email-content"></textarea>
         </div>
         <label for="csv-recipients">Email addresses</label>
         <div id="email-details-container">

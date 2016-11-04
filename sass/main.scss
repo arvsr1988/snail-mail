@@ -113,6 +113,12 @@ a:hover {
         width: 90%;
         display: inline;
       }
+      
+      #subject {
+        width : 100%;
+        border-collapse : collapse;
+        margin-top : 0;
+      }
       textarea {
         height: 75px;
       }
