@@ -1,20 +1,23 @@
 {
-  "name": "personalised-messenger",
+  "name": "snail-mail",
   "version": "0.0.1",
   "scripts": {
-    "compile-scripts": "webpack",
+    "compile-scripts": "webpack --config webpack/config/webpack.config.js",
     "sass": "node-sass sass/ -o public/",
-    "build-dev": "mkdir -p public/ && (node build/copy_dev_files.js & npm run compile-scripts & npm run sass)",
+    "setup-public-folder": "mkdir -p public/ && node build/copy_dev_files.js",
+    "build-dev": "npm run setup-public-folder && npm run compile-scripts && npm run sass",
     "prestart-dev": "npm run build-dev",
     "start-dev": "node app.js",
-    "watch" : "cd build/ && node watcher.js",
+    "watch": "cd build/ && node watcher.js",
     "clean-artifact": "node build/clean_artifact.js",
     "copy-artifact-files": "node build/copy_files.js",
-    "uglify-js-files": "node build/uglify_js_files.js",
-    "precreate-artifact": "npm run clean-artifact & npm run build-dev",
-    "create-artifact": "npm run copy-artifact-files && npm run uglify-js-files && gulp revreplace"
+    "precreate-artifact": "npm run clean-artifact && npm run setup-public-folder && webpack --config webpack/config/webpack.prod.config.js && npm run sass",
+    "create-artifact": "npm run copy-artifact-files && gulp revreplace"
   },
   "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-preset-env": "^1.5.0",
     "browser-sync": "^2.7.4",
     "connect-livereload": "~0.4.0",
     "gulp": "^3.8.6",
@@ -33,7 +36,8 @@
     "uglify-js": "^2.6.2",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.2.1",
-    "webpack": "^2.4.1"
+    "webpack": "^2.5.1",
+    "webpack-md5-hash": "^0.0.5"
   },
   "engines": {
     "node": "6.0.0"

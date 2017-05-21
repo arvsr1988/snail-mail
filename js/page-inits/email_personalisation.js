@@ -10,7 +10,7 @@ var emailPersonalisation = require('../../app/email.personalisation');
 var tracking = require('../tracking');
 var writeEmailViewModel = require('../view_models/write_email');
 
-getEmailAttributeRowData = function(attributes, attributeData, rowIndexStart){
+const getEmailAttributeRowData = (attributes, attributeData, rowIndexStart) => {
   var attributeViewData = [];
   rowIndexStart = rowIndexStart || 0;
   attributeData.forEach(function(row, rowIndex){
