@@ -9,6 +9,9 @@ exports.send = function (req, res) {
     var smtpPassword = req.body.smtpPassword;
     var transportObject = transportHelper.getSmtpTransport(smtpServer, smtpUser, smtpPassword);
     var emailArray = emailHelpers.getEmailArray(requestHelpers.getHostName(req), req.body);
+    const {attachmentName, attachmentData} = req.body;
+    const attachment = {name : attachmentName, data: attachmentData}
+    req.body.attachment = attachment;
     emailer.sendEmails(emailArray, req.body, transportObject, '', function (sendEmailResponse) {
         res.send(sendEmailResponse);
     });
