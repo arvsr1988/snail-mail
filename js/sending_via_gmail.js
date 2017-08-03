@@ -17,7 +17,7 @@ $(document).ready(function(){
         success : function(data){
             var sendResponseHtml = responseTemplate(data);
             $("#sending-container").html(sendResponseHtml);
-            emailData.removeEmailData();
+            emailDataHelper.removeEmailData();
             if(!data.successful){
                 return false;
             }

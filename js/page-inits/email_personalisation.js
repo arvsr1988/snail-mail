@@ -9,6 +9,8 @@ var emailPreview = require('../personalisation/preview');
 var emailPersonalisation = require('../../app/email.personalisation');
 var tracking = require('../tracking');
 var writeEmailViewModel = require('../view_models/write_email');
+const emailData = require('../functions/email_data');
+const fileUploadHandler = require('../personalisation/file.upload.handler');
 
 const getEmailAttributeRowData = (attributes, attributeData, rowIndexStart) => {
   var attributeViewData = [];
@@ -68,9 +70,16 @@ module.exports = {
             }
             var anyAttributeEmpty = emptyAttributes($("#attribute-details").serializeArray());
             $("#empty-attributes").toggle(anyAttributeEmpty);
-            login.init();
-            flow.moveTo("login-details");
-            tracking.track('submitPersonalisation', $("#attribute-details input[name=email]").length);
+            fileUploadHandler.getAttachment().then(attachmentData => {
+              const serializedFormDetails = $("#attribute-details").serialize() + '&' +  $("#email-details-form").serialize();
+              emailData.save({emailData: serializedFormDetails, attachmentData});
+              login.init();
+              flow.moveTo("login-details");
+              tracking.track('submitPersonalisation', $("#attribute-details input[name=email]").length);
+            }).catch(e => {
+              alert("oh no, something went wrong. please try again.");
+              console.log(e);
+            })
             return false;
         });
     },
