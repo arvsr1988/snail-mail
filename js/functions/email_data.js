@@ -1,17 +1,31 @@
-var emailDataKey = "emailData";
+const emailDataKey = "emailData";
 
-var save = function(serializedForm){
-    localStorage.setItem(emailDataKey, serializedForm);
+const save = function(serializedForm){
+    localStorage.setItem(emailDataKey, JSON.stringify(serializedForm));
 };
 
-var getEmailData = function(){
-    return localStorage.getItem(emailDataKey);
+const getEmailData = function(){
+  let emailData = localStorage.getItem(emailDataKey);
+  try {
+    return JSON.parse(emailData) || {}
+  } catch (ex){
+    console.log("exception parsing email data");
+    return {}
+  }
 };
 
-var removeEmailData = function(){
-    localStorage.removeItem(emailDataKey);
+const removeEmailData = function(){
+  localStorage.removeItem(emailDataKey);
 };
 
-exports.getEmailData = getEmailData;
-exports.save = save;
-exports.removeEmailData = removeEmailData;
+const saveAttachment = (data) => {
+  const emailData = getEmailData();
+  emailData.attachment = data;
+  save(data);
+}
+
+module.exports = {
+  getEmailData,
+  save,
+  removeEmailData
+}

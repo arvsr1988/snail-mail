@@ -1,12 +1,15 @@
-var emailData = require('./functions/email_data');
-var responseTemplate = require('../views/send-email-response.hbs');
-var Handlebars = require("hbsfy/runtime");
+const emailDataHelper = require('./functions/email_data');
+const responseTemplate = require('../views/send-email-response.hbs');
+const Handlebars = require("hbsfy/runtime");
+const tracking = require('./tracking');
+
 Handlebars.registerPartial('send_email_status', require('../views/partials/send_email_status.hbs'));
-var tracking = require('./tracking');
+
 $(document).ready(function(){
-    var savedEmails = emailData.getEmailData();
-    var serializedFormData = savedEmails + '&googleOauthCode=' + $("#googleOauthCode").val();
-    console.log(JSON.stringify(savedEmails));
+    const {emailData, attachmentData} = emailDataHelper.getEmailData();
+    const {name, data} = attachmentData;
+    const attachmentString = name ? `&attachmentName=${name}&attachmentData=${data}` : '';
+    const serializedFormData = emailData + attachmentString + '&googleOauthCode=' + $("#googleOauthCode").val();
     $.ajax({
         type : 'POST',
         url : '/send-gmail-emails',

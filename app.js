@@ -10,7 +10,7 @@ var path = require('path');
 var http = require('http');
 app.use(favicon());
 app.use(logger('dev'));
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit : '10mb'}));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 var hbs = handlebarFactory.init();

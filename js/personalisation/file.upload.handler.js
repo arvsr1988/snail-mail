@@ -1,3 +1,5 @@
+require('es6-promise').polyfill();
+
 var validateUpload = function(element, callback, context){
     if(element.val().length === 0){
         return false;
@@ -9,8 +11,8 @@ var validateUpload = function(element, callback, context){
     var reader = new FileReader();
     reader.readAsText(file);
     reader.onload = function() {
-        var rowHash = parseAttributes(this.result);
-        callback.apply(context, [rowHash]);
+      var rowHash = parseAttributes(this.result);
+      callback.apply(context, [rowHash]);
     };
     return true;
 };
@@ -36,6 +38,33 @@ var parseAttributes = function(stringifiedCSV){
     return attributeHash;
 };
 
+
+const getAttachment = () => {
+  return new Promise((resolve, reject) => {
+    const attachmentElement = $("#attachment");
+    const fileName = attachmentElement.val();
+
+    if(!fileName.length){
+      return resolve({});
+    }
+
+    const reader = new FileReader();
+    const file = attachmentElement.prop('files')[0];
+    const {name} = file;
+    reader.readAsArrayBuffer(file);
+    reader.onloadend = function(){
+      const self = this;
+      const base64 = btoa(
+        new Uint8Array(self.result)
+          .reduce((data, byte) => data + String.fromCharCode(byte), '')
+      );
+
+      resolve({name, data: base64})
+    };
+  })
+}
+
 module.exports = {
-    validateUpload : validateUpload
+  getAttachment,
+  validateUpload : validateUpload
 };
