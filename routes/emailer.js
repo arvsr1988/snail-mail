@@ -11,6 +11,15 @@ module.exports = {
         var successful = true;
         var emailStatusArray = [];
         var shouldEmailResponse = emailArray.length > 10;
+        const {attachment} = commonAttributes;
+        const attachments = [];
+        const {name, data} = attachment;
+        if(name){
+          attachments.push({
+            filename: name,
+            content: new Buffer(data,'base64')
+          });
+        }
         async.eachSeries(emailArray,
             function(email, callback) {
                 var mailOptions = {
@@ -20,7 +29,8 @@ module.exports = {
                     replyTo : commonAttributes['replyTo'] ? commonAttributes['replyTo'] : "",
                     subject: email.subject,
                     text: email.text,
-                    html: email.text
+                    html: email.text,
+                    attachments
                 };
 
                 transport.sendMail(mailOptions, function (error, response) {

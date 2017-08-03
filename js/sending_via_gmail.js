@@ -8,7 +8,7 @@ Handlebars.registerPartial('send_email_status', require('../views/partials/send_
 $(document).ready(function(){
     const {emailData, attachmentData} = emailDataHelper.getEmailData();
     const {name, data} = attachmentData;
-    const attachmentString = name ? `&attachmentName=${name}&attachmentData=${data}` : '';
+    const attachmentString = name ? `&attachmentName=${encodeURIComponent(name)}&attachmentData=${encodeURIComponent(data)}` : '';
     const serializedFormData = emailData + attachmentString + '&googleOauthCode=' + $("#googleOauthCode").val();
     $.ajax({
         type : 'POST',

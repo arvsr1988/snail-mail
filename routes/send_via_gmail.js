@@ -36,16 +36,16 @@ handle: function (req, res) {
             json : true
         }, function (err, response, body) {
             var emailFormParams = req.body;
-            console.dir(emailFormParams);
+            const {attachmentName, attachmentData} = req.body;
             if(!emailFormParams){
                 res.send(200);
                 return;
             }
-
             var fromEmail = body.emails[0].value;
             var emailContent = emailHelpers.getEmailArray(hostname, emailFormParams);
             emailFormParams['email-account'] = fromEmail;
             emailFormParams['accessToken'] = accessToken;
+            emailFormParams.attachment = {name : attachmentName, data: attachmentData}
             var serviceName = 'Gmail';
             var transportObject = transportHelper.getServiceTransport(serviceName, emailFormParams);
             emailer.sendEmails(emailContent, emailFormParams, transportObject, serviceName, function(response){
