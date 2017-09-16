@@ -11,7 +11,7 @@ var http = require('http');
 app.use(favicon());
 app.use(logger('dev'));
 app.use(bodyParser.json({limit : '10mb'}));
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
 app.use(cookieParser());
 var hbs = handlebarFactory.init();
 app.engine('hbs', hbs.engine);
