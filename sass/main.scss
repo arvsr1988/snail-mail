@@ -67,6 +67,9 @@ a:hover {
     padding: 3px;
   }
 
+  input.invalid-input {
+    border: 1px solid darkred;
+  }
 
   .unhappyMessage {
     color: red;

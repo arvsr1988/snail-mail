@@ -42,16 +42,15 @@ module.exports = {
     },
 
     bindFormSubmit: function () {
-        var validEmails = function(){
-            var emailElements = $("#attribute-details input[name=email]");
-            var emailsValid = true;
-            emailElements.each(function(index, element){
-                 if(!emailFunctions.isValidEmail($(element).val())) {
-                     emailsValid = false;
-                     return false;
-                 };
-            });
-            return emailsValid;
+        const invalidInputClass = "invalid-input";
+        const emailAddressInputSelector = "#attribute-details input[name=email]";
+        const getInvalidEmailAddressElements = () => {
+            var emailElements = $(emailAddressInputSelector);
+            $(emailAddressInputSelector).removeClass(invalidInputClass);
+            const invalidEmails = Array.from(emailElements).filter(elem => {
+                return !emailFunctions.isValidEmail(elem.value)
+            })
+            return invalidEmails;
         };
 
         var emptyAttributes = function (formAttributes) {
@@ -63,9 +62,10 @@ module.exports = {
 
         $("#submit-attributes").unbind('click');
         $("#submit-attributes").click(function () {
-            var areEmailsValid = validEmails();
-            if(!areEmailsValid){
-                alert("enter valid emails!");
+            var invalidEmailAddressElements = getInvalidEmailAddressElements();
+            if(invalidEmailAddressElements.length > 0){
+                $(invalidEmailAddressElements).addClass("invalid-input")
+                window.scrollTo({top: $(invalidEmailAddressElements[0]).scrollTop()})
                 return false;
             }
             var anyAttributeEmpty = emptyAttributes($("#attribute-details").serializeArray());
