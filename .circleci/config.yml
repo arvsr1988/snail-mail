@@ -36,6 +36,8 @@ jobs:
       # prepare artifact
       - run: ./prepare_snail_deploy.sh
 
+      - store_artifacts:
+          path: ../snail-deploy/
 
 workflows:
   version: 2
