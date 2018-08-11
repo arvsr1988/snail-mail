@@ -32,7 +32,10 @@ var parseAttributes = function(stringifiedCSV){
         var rowValueArray = row.split(",");
         attributeHash[rowIndex] = {};
         rowValueArray.forEach(function(value, columnIndex){
-           attributeHash[rowIndex][attributeNames[columnIndex]] = value;
+          if(attributeNames[columnIndex].toLowerCase() === 'email') {
+            value = (value || '').trim()
+          }
+          attributeHash[rowIndex][attributeNames[columnIndex]] = value;
         });
     });
     return attributeHash;
