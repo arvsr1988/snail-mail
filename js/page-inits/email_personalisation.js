@@ -65,7 +65,7 @@ module.exports = {
             var invalidEmailAddressElements = getInvalidEmailAddressElements();
             if(invalidEmailAddressElements.length > 0){
                 $(invalidEmailAddressElements).addClass("invalid-input")
-                window.scrollTo({top: $(invalidEmailAddressElements[0]).scrollTop()})
+                window.scrollTo({top: $(invalidEmailAddressElements[0]).offset().top})
                 return false;
             }
             var anyAttributeEmpty = emptyAttributes($("#attribute-details").serializeArray());
