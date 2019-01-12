@@ -1,4 +1,5 @@
 require('es6-promise').polyfill();
+const neatCsv = require('neat-csv');
 
 var validateUpload = function(element, callback, context){
     if(element.val().length === 0){
@@ -11,39 +12,14 @@ var validateUpload = function(element, callback, context){
     var reader = new FileReader();
     reader.readAsText(file);
     reader.onload = function() {
-      var rowHash = parseAttributes(this.result);
-      callback.apply(context, [rowHash]);
+      neatCsv(this.result).then(data => {
+        callback.apply(context, [data]);
+      }).catch(err => {
+        alert("something is wrong with your file upload");
+      });
     };
     return true;
 };
-
-var parseAttributes = function(stringifiedCSV){
-    var attributeRows = stringifiedCSV.split('\n');
-    if(attributeRows.length <= 1){
-        return [];
-    }
-
-    var attributeNames = attributeRows.splice(0,1)[0].split(",");
-    attributeNames.forEach(function(attrName,index){
-       attributeNames[index] = attrName.trim();
-    });
-    var attributeHash = [];
-    attributeRows.forEach(function(row, rowIndex){
-        var rowValueArray = row.split(",");
-        attributeHash[rowIndex] = {};
-        rowValueArray.forEach(function(value, columnIndex){
-          const columnName = (attributeNames[columnIndex] || '').toLowerCase();
-          if(columnName === 'email'){
-            value = (value || '').trim()
-          }
-          if(columnName !== ''){
-            attributeHash[rowIndex][attributeNames[columnIndex]] = value;
-          }
-        });
-    });
-    return attributeHash;
-};
-
 
 const getAttachment = () => {
   return new Promise((resolve, reject) => {
@@ -72,5 +48,5 @@ const getAttachment = () => {
 
 module.exports = {
   getAttachment,
-  validateUpload : validateUpload
+  validateUpload
 };
