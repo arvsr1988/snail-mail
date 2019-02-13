@@ -22,13 +22,6 @@ module.exports = {
               "targets": {
                 "browsers": ["last 2 versions", "> 5%"]
               }
-            }],
-            "stage-0"
-          ],
-          "plugins": [
-            ["transform-runtime", {
-              "polyfill": false,
-              "regenerator": true
             }]
           ]
         }
