@@ -12,3 +12,4 @@ cd $SOURCE_DIR && npm run create-artifact
 cp $SOURCE_DIR/package.json $DEPLOY_DIR/
 cp -rf $SOURCE_DIR/dist/* $DEPLOY_DIR/
 cd $DEPLOY_DIR
+chmod -R 755 public/
