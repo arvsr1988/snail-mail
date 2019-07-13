@@ -2,7 +2,7 @@
   "name": "snail-mail",
   "version": "0.0.1",
   "scripts": {
-    "start": "PORT=5000 node app.js",
+    "start": "NODE_ENV=production PORT=5000 node app.js",
     "compile-scripts": "webpack --config webpack/config/webpack.config.js",
     "sass": "node-sass sass/ -o public/",
     "setup-public-folder": "mkdir -p public/ && node build/copy_dev_files.js",
@@ -41,7 +41,7 @@
     "webpack-md5-hash": "^0.0.5"
   },
   "engines": {
-    "node": "^10.0.0"
+    "node": "~10.8.0"
   },
   "dependencies": {
     "async": "^0.9.0",
