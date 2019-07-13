@@ -43,6 +43,7 @@ jobs:
           name: Deploy Artifact to Heroku
           command: |
             cd ../snail-deploy/
+            ls -ltrh
             git init
             git config user.email "$EMAIL"
             git config user.name "Arvind"
